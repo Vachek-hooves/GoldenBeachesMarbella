@@ -11,28 +11,29 @@ import React, {useState} from 'react';
 import {useStoreProvider} from '../store/context';
 import AddBeach from '../components/ui/IconBtn/AddBeach';
 // import { Ionicons } from '@expo/vector-icons'
+import BeachCard from '../components/actions/BeachCard';
 
 const Main = () => {
   const {beaches} = useStoreProvider();
   const [activeTab, setActiveTab] = useState('General');
 
-  const BeachCard = ({beach}) => (
-    <TouchableOpacity style={styles.card}>
-      <Image source={{uri: beach.image}} style={styles.beachImage} />
-      <TouchableOpacity style={styles.favoriteButton}>
-        <Image
-          source={require('../assets/icons/heart.png')}
-          style={styles.favoriteButton}
-        />
-      </TouchableOpacity>
-      <View style={styles.cardContent}>
-        <Text style={styles.beachName}>{beach.name}</Text>
-        <Text style={styles.beachDescription} numberOfLines={1}>
-          {beach.description}
-        </Text>
-      </View>
-    </TouchableOpacity>
-  );
+  // const BeachCard = ({beach}) => (
+  //   <TouchableOpacity style={styles.card}>
+  //     <Image source={{uri: beach.image}} style={styles.beachImage} />
+  //     <TouchableOpacity style={styles.favoriteButton}>
+  //       <Image
+  //         source={require('../assets/icons/heart.png')}
+  //         style={styles.favoriteButton}
+  //       />
+  //     </TouchableOpacity>
+  //     <View style={styles.cardContent}>
+  //       <Text style={styles.beachName}>{beach.name}</Text>
+  //       <Text style={styles.beachDescription} numberOfLines={1}>
+  //         {beach.description}
+  //       </Text>
+  //     </View>
+  //   </TouchableOpacity>
+  // );
 
   return (
     <SafeAreaView style={styles.container}>
@@ -127,38 +128,38 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
     padding: 8,
   },
-  card: {
-    width: '48%',
-    marginHorizontal: '1%',
-    marginBottom: 16,
-    borderRadius: 12,
-    overflow: 'hidden',
-    backgroundColor: '#1a1a1a',
-  },
-  beachImage: {
-    width: '100%',
-    height: 150,
-  },
-  favoriteButton: {
-    position: 'absolute',
-    right: 8,
-    top: 8,
-    width: 28,
-    height: 24,
-  },
-  cardContent: {
-    padding: 8,
-  },
-  beachName: {
-    color: 'white',
-    fontWeight: 'bold',
-    fontSize: 16,
-  },
-  beachDescription: {
-    color: 'gray',
-    fontSize: 12,
-    marginTop: 4,
-  },
+  // card: {
+  //   width: '48%',
+  //   marginHorizontal: '1%',
+  //   marginBottom: 16,
+  //   borderRadius: 12,
+  //   overflow: 'hidden',
+  //   backgroundColor: '#1a1a1a',
+  // },
+  // beachImage: {
+  //   width: '100%',
+  //   height: 150,
+  // },
+  // favoriteButton: {
+  //   position: 'absolute',
+  //   right: 8,
+  //   top: 8,
+  //   width: 28,
+  //   height: 24,
+  // },
+  // cardContent: {
+  //   padding: 8,
+  // },
+  // beachName: {
+  //   color: 'white',
+  //   fontWeight: 'bold',
+  //   fontSize: 16,
+  // },
+  // beachDescription: {
+  //   color: 'gray',
+  //   fontSize: 12,
+  //   marginTop: 4,
+  // },
   bottomNav: {
     flexDirection: 'row',
     justifyContent: 'space-around',
