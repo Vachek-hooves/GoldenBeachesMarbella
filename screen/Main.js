@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import React, {useState} from 'react';
 import {useStoreProvider} from '../store/context';
+import AddBeach from '../components/ui/IconBtn/AddBeach';
 // import { Ionicons } from '@expo/vector-icons'
 
 const Main = () => {
@@ -19,7 +20,6 @@ const Main = () => {
     <TouchableOpacity style={styles.card}>
       <Image source={{uri: beach.image}} style={styles.beachImage} />
       <TouchableOpacity style={styles.favoriteButton}>
-        
         <Image
           source={require('../assets/icons/heart.png')}
           style={styles.favoriteButton}
@@ -75,6 +75,7 @@ const Main = () => {
           ))}
         </View>
       </ScrollView>
+      <AddBeach />
     </SafeAreaView>
   );
 };

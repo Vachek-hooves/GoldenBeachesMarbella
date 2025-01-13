@@ -4,5 +4,14 @@ import Reviews from './Reviews';
 import Activities from './Activities';
 import Setting from './Setting';
 import BeachDetails from './BeachDetails';
+import AddBeach from './AddBeach';
 
-export {IntroScreen, Main, Reviews, Activities, Setting, BeachDetails};
+export {
+  IntroScreen,
+  Main,
+  Reviews,
+  Activities,
+  Setting,
+  BeachDetails,
+  AddBeach,
+};
