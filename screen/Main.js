@@ -16,7 +16,7 @@ const Main = () => {
   const [activeTab, setActiveTab] = useState('General');
 
   const BeachCard = ({beach}) => (
-    <View style={styles.card}>
+    <TouchableOpacity style={styles.card}>
       <Image source={{uri: beach.image}} style={styles.beachImage} />
       <TouchableOpacity style={styles.favoriteButton}>
         
@@ -31,7 +31,7 @@ const Main = () => {
           {beach.description}
         </Text>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 
   return (
@@ -142,7 +142,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     right: 8,
     top: 8,
-    width: 24,
+    width: 28,
     height: 24,
   },
   cardContent: {
