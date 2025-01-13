@@ -7,17 +7,26 @@ import {
   TouchableOpacity,
   ScrollView,
   Image,
+  Modal,
+  Dimensions,
 } from 'react-native';
 import React, { useState } from 'react';
 import { useStoreProvider } from '../store/context';
 import { launchImageLibrary } from 'react-native-image-picker';
+import MapView, { Marker } from 'react-native-maps';
+
+const { width } = Dimensions.get('window');
 
 const AddBeach = ({ navigation }) => {
   const { beaches, updateBeaches } = useStoreProvider();
+  const [showMap, setShowMap] = useState(false);
   const [beachData, setBeachData] = useState({
     name: '',
     address: '',
-    location: '',
+    location: {
+      lat: 36.5178217173861,
+      lng: -4.894346246476643,
+    },
     description: '',
     image: '',
     facilities: [{ name: '', text: '' }],
@@ -35,6 +44,21 @@ const AddBeach = ({ navigation }) => {
         image: result.assets[0].uri,
       }));
     }
+  };
+
+  const handleMapPress = (event) => {
+    const { coordinate } = event.nativeEvent;
+    setBeachData(prev => ({
+      ...prev,
+      location: {
+        lat: coordinate.latitude,
+        lng: coordinate.longitude,
+      },
+    }));
+  };
+
+  const handleConfirmLocation = () => {
+    setShowMap(false);
   };
 
   const handleAddFacility = () => {
@@ -57,6 +81,7 @@ const AddBeach = ({ navigation }) => {
     const newBeach = {
       id: Date.now().toString(),
       ...beachData,
+      addresss: beachData.address, // Note the three 's' to match your data structure
     };
 
     await updateBeaches([...beaches, newBeach]);
@@ -98,13 +123,27 @@ const AddBeach = ({ navigation }) => {
         />
 
         <Text style={styles.label}>Location</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Beach location"
-          placeholderTextColor="#666"
-          value={beachData.location}
-          onChangeText={(text) => setBeachData(prev => ({ ...prev, location: text }))}
-        />
+        <TouchableOpacity 
+          style={styles.locationPicker}
+          onPress={() => setShowMap(true)}
+        >
+          <View style={styles.locationContent}>
+            {/* <Image 
+              source={require('../assets/icons/location.png')} 
+              style={styles.locationIcon} 
+            /> */}<Text>+</Text>
+            <Text style={styles.locationText}>
+              {beachData.location.lat !== 0 
+                ? `${beachData.location.lat.toFixed(6)}, ${beachData.location.lng.toFixed(6)}`
+                : 'Select location on map'
+              }
+            </Text>
+          </View>
+          {/* <Image 
+            source={require('../assets/icons/arrow.png')} 
+            style={styles.arrowIcon} 
+          /> */}
+        </TouchableOpacity>
 
         <Text style={styles.label}>Description</Text>
         <TextInput
@@ -162,6 +201,51 @@ const AddBeach = ({ navigation }) => {
           <Text style={styles.saveButtonText}>Save</Text>
         </TouchableOpacity>
       </ScrollView>
+
+      <Modal
+        visible={showMap}
+        animationType="slide"
+        statusBarTranslucent
+      >
+        <SafeAreaView style={styles.modalContainer}>
+          <View style={styles.modalHeader}>
+            <TouchableOpacity 
+              onPress={() => setShowMap(false)}
+              style={styles.modalBackButton}
+            >
+              <Image 
+                source={require('../assets/icons/return.png')} 
+                style={styles.backIcon} 
+              />
+            </TouchableOpacity>
+            <Text style={styles.modalTitle}>Select Location</Text>
+            <TouchableOpacity 
+              onPress={handleConfirmLocation}
+              style={styles.confirmButton}
+            >
+              <Text style={styles.confirmText}>Confirm</Text>
+            </TouchableOpacity>
+          </View>
+
+          <MapView
+            style={styles.modalMap}
+            initialRegion={{
+              latitude: beachData.location.lat,
+              longitude: beachData.location.lng,
+              latitudeDelta: 0.0922,
+              longitudeDelta: 0.0421,
+            }}
+            onPress={handleMapPress}
+          >
+            <Marker
+              coordinate={{
+                latitude: beachData.location.lat,
+                longitude: beachData.location.lng,
+              }}
+            />
+          </MapView>
+        </SafeAreaView>
+      </Modal>
     </SafeAreaView>
   );
 };
@@ -258,5 +342,90 @@ const styles = StyleSheet.create({
     color: 'black',
     fontSize: 16,
     fontWeight: 'bold',
+  },
+  mapContainer: {
+    height: 200,
+    marginBottom: 16,
+    borderRadius: 8,
+    overflow: 'hidden',
+  },
+  map: {
+    flex: 1,
+  },
+  mapHelper: {
+    position: 'absolute',
+    bottom: 8,
+    left: 8,
+    right: 8,
+    backgroundColor: 'rgba(0,0,0,0.7)',
+    padding: 8,
+    borderRadius: 4,
+    color: 'white',
+    textAlign: 'center',
+    fontSize: 12,
+  },
+  locationPicker: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    backgroundColor: '#1a1a1a',
+    padding: 12,
+    borderRadius: 8,
+    marginBottom: 16,
+  },
+  locationContent: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    flex: 1,
+  },
+  locationIcon: {
+    width: 20,
+    height: 20,
+    tintColor: 'white',
+    marginRight: 8,
+  },
+  locationText: {
+    color: 'white',
+    flex: 1,
+  },
+  arrowIcon: {
+    width: 16,
+    height: 16,
+    tintColor: 'white',
+  },
+  modalContainer: {
+    flex: 1,
+    backgroundColor: 'black',
+  },
+  modalHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    padding: 16,
+    borderBottomWidth: 1,
+    borderBottomColor: '#333',
+  },
+  modalBackButton: {
+    backgroundColor: 'rgba(255,255,255,0.2)',
+    padding: 8,
+    borderRadius: 12,
+  },
+  modalTitle: {
+    color: 'white',
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+  confirmButton: {
+    backgroundColor: '#FFD700',
+    paddingVertical: 8,
+    paddingHorizontal: 16,
+    borderRadius: 8,
+  },
+  confirmText: {
+    color: 'black',
+    fontWeight: 'bold',
+  },
+  modalMap: {
+    flex: 1,
   },
 });

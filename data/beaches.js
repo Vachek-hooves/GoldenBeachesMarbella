@@ -5,7 +5,7 @@ export const BEACHES = [
     name: 'Playa de la Fontanilla',
     id: 1,
     addresss: '29602 Marbella, Spain',
-    location: {lat: 36.28891666171115, lng: -6.1077190426562264},
+    location: {lat: 36.50891666171115, lng: -4.8977190426},
     description:
       'Playa de la Fontanilla is a stunning beach located in the heart of Marbella, Spain. Known for its golden sands and crystal-clear waters, this beach offers a perfect escape for sunbathers and water sports enthusiasts alike. The beach is lined with charming beach bars and restaurants, where visitors can savor delicious local cuisine and refreshing drinks. With its family-friendly atmosphere, Playa de la Fontanilla is ideal for a day out with loved ones, featuring facilities such as sun loungers, umbrellas, and showers. Whether you are looking to relax under the sun or enjoy a variety of activities, this beach is a must-visit destination in Marbella.',
 
