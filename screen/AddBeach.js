@@ -8,24 +8,39 @@ import {
   ScrollView,
   Image,
 } from 'react-native';
-import React, {useState} from 'react';
-import {useStoreProvider} from '../store/context';
+import React, { useState } from 'react';
+import { useStoreProvider } from '../store/context';
+import { launchImageLibrary } from 'react-native-image-picker';
 
-const AddBeach = ({navigation}) => {
-  const {beaches, updateBeaches} = useStoreProvider();
+const AddBeach = ({ navigation }) => {
+  const { beaches, updateBeaches } = useStoreProvider();
   const [beachData, setBeachData] = useState({
-    heading: '',
-    description: '',
+    name: '',
+    address: '',
     location: '',
-    waterTemp: '',
+    description: '',
     image: '',
-    facilities: [{heading: '', description: ''}],
+    facilities: [{ name: '', text: '' }],
   });
+
+  const handleImagePick = async () => {
+    const result = await launchImageLibrary({
+      mediaType: 'photo',
+      quality: 0.8,
+    });
+
+    if (result.assets && result.assets[0]) {
+      setBeachData(prev => ({
+        ...prev,
+        image: result.assets[0].uri,
+      }));
+    }
+  };
 
   const handleAddFacility = () => {
     setBeachData(prev => ({
       ...prev,
-      facilities: [...prev.facilities, {heading: '', description: ''}],
+      facilities: [...prev.facilities, { name: '', text: '' }],
     }));
   };
 
@@ -35,18 +50,13 @@ const AddBeach = ({navigation}) => {
       ...updatedFacilities[index],
       [field]: value,
     };
-    setBeachData(prev => ({...prev, facilities: updatedFacilities}));
+    setBeachData(prev => ({ ...prev, facilities: updatedFacilities }));
   };
 
   const handleSave = async () => {
     const newBeach = {
       id: Date.now().toString(),
-      name: beachData.heading,
-      description: beachData.description,
-      location: beachData.location,
-      waterTemperature: beachData.waterTemp,
-      image: beachData.image || 'default_image_url',
-      facilities: beachData.facilities,
+      ...beachData,
     };
 
     await updateBeaches([...beaches, newBeach]);
@@ -56,43 +66,35 @@ const AddBeach = ({navigation}) => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
-        <TouchableOpacity
+        <TouchableOpacity 
           onPress={() => navigation.goBack()}
-          style={{
-            backgroundColor: 'rgba(255,255,255,0.2)', //gray rgba
-            padding: 8,
-            borderRadius: 12,
-          }}>
-          <Image
-            source={require('../assets/icons/return.png')}
-            // style={styles.backIcon}
-            style={{width: 24, height: 24}}
+          style={styles.backButton}
+        >
+          <Image 
+            source={require('../assets/icons/return.png')} 
+            style={styles.backIcon} 
           />
         </TouchableOpacity>
         <Text style={styles.headerTitle}>Add a beach</Text>
       </View>
 
       <ScrollView style={styles.form}>
-        <Text style={styles.label}>Heading</Text>
+        <Text style={styles.label}>Name</Text>
         <TextInput
           style={styles.input}
           placeholder="Beach name"
           placeholderTextColor="#666"
-          value={beachData.heading}
-          onChangeText={text =>
-            setBeachData(prev => ({...prev, heading: text}))
-          }
+          value={beachData.name}
+          onChangeText={(text) => setBeachData(prev => ({ ...prev, name: text }))}
         />
 
-        <Text style={styles.label}>Description</Text>
+        <Text style={styles.label}>Address</Text>
         <TextInput
           style={styles.input}
-          placeholder="Beach description"
+          placeholder="Beach address"
           placeholderTextColor="#666"
-          value={beachData.description}
-          onChangeText={text =>
-            setBeachData(prev => ({...prev, description: text}))
-          }
+          value={beachData.address}
+          onChangeText={(text) => setBeachData(prev => ({ ...prev, address: text }))}
         />
 
         <Text style={styles.label}>Location</Text>
@@ -101,29 +103,34 @@ const AddBeach = ({navigation}) => {
           placeholder="Beach location"
           placeholderTextColor="#666"
           value={beachData.location}
-          onChangeText={text =>
-            setBeachData(prev => ({...prev, location: text}))
-          }
+          onChangeText={(text) => setBeachData(prev => ({ ...prev, location: text }))}
         />
 
-        <Text style={styles.label}>Average water temperature °C</Text>
+        <Text style={styles.label}>Description</Text>
         <TextInput
-          style={styles.input}
-          placeholder="Water temperature"
+          style={[styles.input, styles.textArea]}
+          placeholder="Beach description"
           placeholderTextColor="#666"
-          keyboardType="numeric"
-          value={beachData.waterTemp}
-          onChangeText={text =>
-            setBeachData(prev => ({...prev, waterTemp: text}))
-          }
+          multiline
+          numberOfLines={4}
+          value={beachData.description}
+          onChangeText={(text) => setBeachData(prev => ({ ...prev, description: text }))}
         />
 
         <Text style={styles.label}>Cover</Text>
-        <View style={styles.imageUpload}>
-          <TouchableOpacity style={styles.uploadButton}>
+        <TouchableOpacity 
+          style={styles.imageUpload} 
+          onPress={handleImagePick}
+        >
+          {beachData.image ? (
+            <Image 
+              source={{ uri: beachData.image }} 
+              style={styles.selectedImage} 
+            />
+          ) : (
             <Text style={styles.uploadText}>+ Upload Image</Text>
-          </TouchableOpacity>
-        </View>
+          )}
+        </TouchableOpacity>
 
         {beachData.facilities.map((facility, index) => (
           <View key={index} style={styles.facilityContainer}>
@@ -132,22 +139,22 @@ const AddBeach = ({navigation}) => {
               style={styles.input}
               placeholder="Facility name"
               placeholderTextColor="#666"
-              value={facility.heading}
-              onChangeText={text => updateFacility(index, 'heading', text)}
+              value={facility.name}
+              onChangeText={(text) => updateFacility(index, 'name', text)}
             />
             <TextInput
-              style={styles.input}
+              style={[styles.input, styles.textArea]}
               placeholder="Facility description"
               placeholderTextColor="#666"
-              value={facility.description}
-              onChangeText={text => updateFacility(index, 'description', text)}
+              multiline
+              numberOfLines={4}
+              value={facility.text}
+              onChangeText={(text) => updateFacility(index, 'text', text)}
             />
           </View>
         ))}
 
-        <TouchableOpacity
-          onPress={handleAddFacility}
-          style={styles.addFacilityButton}>
+        <TouchableOpacity onPress={handleAddFacility} style={styles.addFacilityButton}>
           <Text style={styles.addFacilityText}>+ Add facility</Text>
         </TouchableOpacity>
 
@@ -171,9 +178,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 16,
   },
+  backButton: {
+    backgroundColor: 'rgba(255,255,255,0.2)',
+    padding: 8,
+    borderRadius: 12,
+  },
   backIcon: {
-    width: 12,
-    height: 12,
+    width: 24,
+    height: 24,
     tintColor: 'white',
   },
   headerTitle: {
@@ -197,6 +209,10 @@ const styles = StyleSheet.create({
     color: 'white',
     marginBottom: 16,
   },
+  textArea: {
+    height: 100,
+    textAlignVertical: 'top',
+  },
   imageUpload: {
     height: 200,
     backgroundColor: '#1a1a1a',
@@ -204,9 +220,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginBottom: 16,
+    overflow: 'hidden',
   },
-  uploadButton: {
-    padding: 12,
+  selectedImage: {
+    width: '100%',
+    height: '100%',
+    resizeMode: 'cover',
   },
   uploadText: {
     color: '#FFD700',
@@ -238,11 +257,6 @@ const styles = StyleSheet.create({
   saveButtonText: {
     color: 'black',
     fontSize: 16,
-    fontWeight: 'bold',
-  },
-  backIcon: {
-    color: 'white',
-    fontSize: 24,
     fontWeight: 'bold',
   },
 });
