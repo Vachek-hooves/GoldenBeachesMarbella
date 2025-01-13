@@ -6,12 +6,23 @@ import {
   Image,
   ScrollView,
   TouchableOpacity,
+  Modal,
+  Dimensions,
+  Linking,
 } from 'react-native';
-import React from 'react';
+import React, { useState } from 'react';
+import MapView, { Marker } from 'react-native-maps';
+
+const { width } = Dimensions.get('window');
 
 const BeachDetails = ({ route, navigation }) => {
   const { beach } = route.params;
-  console.log(beach);
+  const [showMap, setShowMap] = useState(false);
+
+  const handleOpenMaps = () => {
+    const url = `https://www.google.com/maps/search/?api=1&query=${beach.location.lat},${beach.location.lng}`;
+    Linking.openURL(url);
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -38,17 +49,47 @@ const BeachDetails = ({ route, navigation }) => {
         <View style={styles.content}>
           <Text style={styles.title}>{beach.name}</Text>
 
-          <TouchableOpacity style={styles.locationContainer}>
+          <TouchableOpacity 
+            style={styles.locationContainer}
+            onPress={handleOpenMaps}
+          >
             {/* <Image 
               source={require('../assets/icons/location.png')} 
               style={styles.locationIcon} 
             /> */}
-            {/* <Text style={styles.locationText}>{beach.location}</Text> */}
+            <Text style={styles.locationText}>{beach.addresss}</Text>
             {/* <Image 
               source={require('../assets/icons/arrow.png')} 
               style={styles.arrowIcon} 
             /> */}
           </TouchableOpacity>
+
+          <View style={styles.mapPreviewContainer}>
+            <MapView
+              style={styles.mapPreview}
+              initialRegion={{
+                latitude: beach.location.lat,
+                longitude: beach.location.lng,
+                latitudeDelta: 0.01,
+                longitudeDelta: 0.01,
+              }}
+              scrollEnabled={false}
+              zoomEnabled={false}
+            >
+              <Marker
+                coordinate={{
+                  latitude: beach.location.lat,
+                  longitude: beach.location.lng,
+                }}
+              />
+            </MapView>
+            <TouchableOpacity 
+              style={styles.expandMapButton}
+              onPress={() => setShowMap(true)}
+            >
+              <Text style={styles.expandMapText}>View Full Map</Text>
+            </TouchableOpacity>
+          </View>
 
           <View style={styles.temperatureContainer}>
             {/* <Image 
@@ -76,6 +117,52 @@ const BeachDetails = ({ route, navigation }) => {
           </View>
         </View>
       </ScrollView>
+
+      <Modal
+        visible={showMap}
+        animationType="slide"
+        statusBarTranslucent
+      >
+        <SafeAreaView style={styles.modalContainer}>
+          <View style={styles.modalHeader}>
+            <TouchableOpacity 
+              onPress={() => setShowMap(false)}
+              style={styles.modalBackButton}
+            >
+              <Image 
+                source={require('../assets/icons/return.png')} 
+                style={styles.backIcon} 
+              />
+            </TouchableOpacity>
+            <Text style={styles.modalTitle}>{beach.name}</Text>
+            <TouchableOpacity 
+              onPress={handleOpenMaps}
+              style={styles.openMapsButton}
+            >
+              <Text style={styles.openMapsText}>Open in Maps</Text>
+            </TouchableOpacity>
+          </View>
+
+          <MapView
+            style={styles.modalMap}
+            initialRegion={{
+              latitude: beach.location.lat,
+              longitude: beach.location.lng,
+              latitudeDelta: 0.02,
+              longitudeDelta: 0.02,
+            }}
+          >
+            <Marker
+              coordinate={{
+                latitude: beach.location.lat,
+                longitude: beach.location.lng,
+              }}
+              title={beach.name}
+              description={beach.addresss}
+            />
+          </MapView>
+        </SafeAreaView>
+      </Modal>
     </SafeAreaView>
   );
 };
@@ -208,6 +295,64 @@ const styles = StyleSheet.create({
   signUpText: {
     color: '#FFD700',
     fontSize: 14,
+    fontWeight: 'bold',
+  },
+  mapPreviewContainer: {
+    height: 200,
+    marginVertical: 16,
+    borderRadius: 12,
+    overflow: 'hidden',
+    position: 'relative',
+  },
+  mapPreview: {
+    flex: 1,
+  },
+  expandMapButton: {
+    position: 'absolute',
+    bottom: 16,
+    left: 16,
+    right: 16,
+    backgroundColor: 'rgba(0,0,0,0.7)',
+    padding: 12,
+    borderRadius: 8,
+    alignItems: 'center',
+  },
+  expandMapText: {
+    color: 'white',
+    fontWeight: 'bold',
+  },
+  modalContainer: {
+    flex: 1,
+    backgroundColor: 'black',
+  },
+  modalHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    padding: 16,
+    backgroundColor: 'black',
+  },
+  modalBackButton: {
+    backgroundColor: 'rgba(255,255,255,0.2)',
+    padding: 8,
+    borderRadius: 12,
+  },
+  modalTitle: {
+    color: 'white',
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+  modalMap: {
+    flex: 1,
+  },
+  openMapsButton: {
+    backgroundColor: '#FFD700',
+    paddingVertical: 8,
+    paddingHorizontal: 16,
+    borderRadius: 8,
+  },
+  openMapsText: {
+    color: 'black',
     fontWeight: 'bold',
   },
 });
