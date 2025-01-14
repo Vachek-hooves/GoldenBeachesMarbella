@@ -1,4 +1,4 @@
-workfows:
+workflows:
   golden-beach-workflow:
     name: Golden Beaches Marbella
     max_build_duration: 120
