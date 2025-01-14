@@ -87,13 +87,13 @@ const BeachDetails = ({route, navigation}) => {
             </TouchableOpacity>
           </View>
 
-          <View style={styles.temperatureContainer}>
-            {/* <Image 
+          {/* <View style={styles.temperatureContainer}>
+            <Image 
               source={require('../assets/icons/temperature.png')} 
               style={styles.temperatureIcon} 
-            /> */}
+            />
             <Text style={styles.temperatureText}>24-25 °C</Text>
-          </View>
+          </View> */}
 
           <Text style={styles.description}>{beach.description}</Text>
 

@@ -44,7 +44,7 @@ const Main = () => {
         </TouchableOpacity>
       </View>
 
-      <View style={styles.tabs}>
+      {/* <View style={styles.tabs}>
         <TouchableOpacity
           style={[styles.tab, activeTab === 'General' && styles.activeTab]}
           onPress={() => setActiveTab('General')}>
@@ -67,7 +67,7 @@ const Main = () => {
             Added
           </Text>
         </TouchableOpacity>
-      </View>
+      </View> */}
 
       <ScrollView style={styles.beachList}>
         <View style={styles.beachGrid}>
