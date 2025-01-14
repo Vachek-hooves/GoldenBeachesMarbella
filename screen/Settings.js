@@ -10,9 +10,12 @@ import {
   Image,
 } from 'react-native';
 import React, {useState} from 'react';
+import {useStoreProvider} from '../store/context';
 
 const Settings = () => {
-  const [isDarkMode, setIsDarkMode] = useState(true);
+  const {isDarkMode, toggleTheme, theme} = useStoreProvider();
+  // const [isDarkMode, setIsDarkMode] = useState(true);
+  console.log(theme);
 
   const handleSupport = async () => {
     const email = 'support@marbellabeaches.com';
@@ -60,8 +63,9 @@ const Settings = () => {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
-      <Text style={styles.title}>Settings</Text>
+    <SafeAreaView
+      style={[styles.container, {backgroundColor: theme.background}]}>
+      <Text style={[styles.title, {color: theme.text}]}>Settings</Text>
 
       <View style={styles.settingsContainer}>
         <TouchableOpacity style={styles.settingItem} onPress={handleSupport}>
@@ -109,16 +113,16 @@ const Settings = () => {
           </View>
         </TouchableOpacity>
 
-        <View style={styles.settingItem}>
+        <View style={[styles.settingItem, {backgroundColor: theme.surface}]}>
           <View style={styles.settingLeft}>
-            <Text style={styles.settingText}>Theme</Text>
+            <Text style={[styles.settingText, {color: theme.text}]}>Theme</Text>
           </View>
           <View style={styles.themeContainer}>
             <Text style={styles.icon}>🌙</Text>
             <Switch
               value={isDarkMode}
-              onValueChange={setIsDarkMode}
-              trackColor={{false: '#767577', true: '#FFD700'}}
+              onValueChange={toggleTheme}
+              trackColor={{false: '#767577', true: theme.accent}}
               thumbColor={isDarkMode ? '#f5dd4b' : '#f4f3f4'}
               ios_backgroundColor="#3e3e3e"
               style={styles.switch}
@@ -135,18 +139,20 @@ export default Settings;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'black',
+    // backgroundColor: 'black',
     paddingHorizontal: 16,
   },
   title: {
-    fontSize: 28,
+    fontSize: 34,
     fontWeight: 'bold',
     color: 'white',
     marginTop: 16,
     marginBottom: 32,
+    marginHorizontal: 10,
   },
   settingsContainer: {
     gap: 16,
+    paddingHorizontal: 10,
   },
   settingItem: {
     flexDirection: 'row',
@@ -161,8 +167,9 @@ const styles = StyleSheet.create({
   },
   settingText: {
     color: 'white',
-    fontSize: 16,
+    fontSize: 24,
     fontWeight: '500',
+    marginHorizontal: 20,
   },
   iconContainer: {
     // width: 32,

@@ -4,30 +4,58 @@ import { BEACHES } from '../data/beaches';
 
 export const StoreContext = createContext({});
 
+// Define theme objects
+export const themes = {
+  light: {
+    background: '#FFFFFF',
+    surface: '#F5F5F5',
+    text: '#000000',
+    textSecondary: '#666666',
+    accent: '#FFD700',
+  },
+  dark: {
+    background: '#000000',
+    surface: '#1a1a1a',
+    text: '#FFFFFF',
+    textSecondary: '#666666',
+    accent: '#FFD700',
+  },
+};
+
 export const StoreProvider = ({children}) => {
   const [beaches, setBeaches] = useState([]);
   const [favorites, setFavorites] = useState([]);
+  const [isDarkMode, setIsDarkMode] = useState(true);
+  const [theme, setTheme] = useState(themes.dark);
 
-  // Initialize beaches and favorites data
+  // Initialize app data and theme
   useEffect(() => {
     const initializeData = async () => {
       try {
-        // Check if beaches exist in AsyncStorage
-        const storedBeaches = await AsyncStorage.getItem('beaches');
-        const storedFavorites = await AsyncStorage.getItem('favorites');
-        
+        const [storedBeaches, storedFavorites, storedTheme] = await Promise.all([
+          AsyncStorage.getItem('beaches'),
+          AsyncStorage.getItem('favorites'),
+          AsyncStorage.getItem('theme'),
+        ]);
+
+        // Initialize beaches
         if (!storedBeaches) {
-          // If no beaches in storage, store the default BEACHES data
           await AsyncStorage.setItem('beaches', JSON.stringify(BEACHES));
           setBeaches(BEACHES);
         } else {
-          // If beaches exist in storage, load them
           setBeaches(JSON.parse(storedBeaches));
         }
 
-        // Load favorites if they exist
+        // Initialize favorites
         if (storedFavorites) {
           setFavorites(JSON.parse(storedFavorites));
+        }
+
+        // Initialize theme
+        if (storedTheme) {
+          const isStoredDarkMode = JSON.parse(storedTheme);
+          setIsDarkMode(isStoredDarkMode);
+          setTheme(isStoredDarkMode ? themes.dark : themes.light);
         }
       } catch (error) {
         console.error('Error initializing data:', error);
@@ -38,35 +66,25 @@ export const StoreProvider = ({children}) => {
     initializeData();
   }, []);
 
-  // Function to update beaches data
-  const updateBeaches = async (newBeaches) => {
+  // Toggle theme function
+  const toggleTheme = async () => {
     try {
-      await AsyncStorage.setItem('beaches', JSON.stringify(newBeaches));
-      setBeaches(newBeaches);
+      const newIsDarkMode = !isDarkMode;
+      await AsyncStorage.setItem('theme', JSON.stringify(newIsDarkMode));
+      setIsDarkMode(newIsDarkMode);
+      setTheme(newIsDarkMode ? themes.dark : themes.light);
     } catch (error) {
-      console.error('Error updating beaches:', error);
-    }
-  };
-
-  // Function to toggle favorite status
-  const toggleFavorite = async (beachId) => {
-    try {
-      const newFavorites = favorites.includes(beachId)
-        ? favorites.filter(id => id !== beachId)
-        : [...favorites, beachId];
-      
-      await AsyncStorage.setItem('favorites', JSON.stringify(newFavorites));
-      setFavorites(newFavorites);
-    } catch (error) {
-      console.error('Error updating favorites:', error);
+      console.error('Error toggling theme:', error);
     }
   };
 
   const value = {
     beaches,
-    updateBeaches,
     favorites,
-    toggleFavorite,
+    theme,
+    isDarkMode,
+    toggleTheme,
+    // ... other existing context values
   };
 
   return (
