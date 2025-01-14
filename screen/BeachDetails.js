@@ -24,6 +24,13 @@ const BeachDetails = ({route, navigation}) => {
     Linking.openURL(url);
   };
 
+  const handleSignUp = (facilityLink) => {
+    if (facilityLink) {
+      Linking.openURL(facilityLink);
+    }
+  };
+  console.log(beach.facilities);
+
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView>
@@ -99,17 +106,20 @@ const BeachDetails = ({route, navigation}) => {
 
           <View style={styles.facilitiesSection}>
             <Text style={styles.facilitiesTitle}>Facilities on site</Text>
-            {beach.facilities.map((facility, index) => (
-              <View key={index} style={styles.facilityItem}>
-                <View>
+            {beach.facilities.map((facility) => (
+              <View key={facility.id} style={styles.facilityItem}>
+                <View style={styles.facilityContent}>
                   <Text style={styles.facilityName}>{facility.name}</Text>
                   <Text style={styles.facilityDescription}>
-                    {facility.text}
+                    {facility.description}
                   </Text>
                 </View>
-                {/* <TouchableOpacity style={styles.signUpButton}>
+                <TouchableOpacity
+                  style={styles.signUpButton}
+                  onPress={() => handleSignUp(facility.link)}
+                >
                   <Text style={styles.signUpText}>Sign up</Text>
-                </TouchableOpacity> */}
+                </TouchableOpacity>
               </View>
             ))}
           </View>
@@ -257,6 +267,10 @@ const styles = StyleSheet.create({
     color: 'white',
     marginBottom: 16,
   },
+  facilityContent: {
+    flex: 1,
+    marginRight: 16,
+  },
   facilityItem: {
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -271,13 +285,12 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
     marginBottom: 4,
-    paddingVertical:6
+    paddingVertical: 6,
   },
   facilityDescription: {
     color: 'gray',
     fontSize: 14,
-    // maxWidth: '80%',
-    
+    maxWidth: '80%',
   },
   signUpButton: {
     backgroundColor: '#333',
