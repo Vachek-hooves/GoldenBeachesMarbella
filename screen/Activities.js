@@ -10,38 +10,41 @@ import {
   Linking,
 } from 'react-native';
 import React from 'react';
-import { BEACHES } from '../data/beaches';
+import {BEACHES} from '../data/beaches';
 
-const { width } = Dimensions.get('window');
+const {width} = Dimensions.get('window');
 
-const Activities = ({ navigation }) => {
+const Activities = ({navigation}) => {
   // Get unique facilities from all beaches
   const uniqueFacilities = Array.from(
     new Set(
-      BEACHES.flatMap(beach => 
-        beach.facilities.map(facility => JSON.stringify(facility))
-      )
-    )
+      BEACHES.flatMap(beach =>
+        beach.facilities.map(facility => JSON.stringify(facility)),
+      ),
+    ),
   ).map(str => JSON.parse(str));
 
-  const handleSignUp = (link) => {
+  const handleSignUp = link => {
     if (link) {
       Linking.openURL(link);
     }
   };
 
-  const handleFacilityPress = (facility) => {
-    navigation.navigate('FacilitiesDetails', { facility });
+  const handleFacilityPress = facility => {
+    navigation.navigate('FacilitiesDetails', {facility});
   };
-console.log(uniqueFacilities.map(facility => facility))
+  console.log(uniqueFacilities.map(facility => facility));
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.title}>Marbella Activities</Text>
       <ScrollView showsVerticalScrollIndicator={false}>
-        {uniqueFacilities.map((facility) => (
-          <TouchableOpacity key={facility.id} style={styles.activityCard} onPress={() => handleFacilityPress(facility)}>
+        {uniqueFacilities.map(facility => (
+          <TouchableOpacity
+            key={facility.id}
+            style={styles.activityCard}
+            onPress={() => handleFacilityPress(facility)}>
             <Image
-              source={{ uri: facility.image }}
+              source={{uri: facility.image}}
               style={styles.activityImage}
             />
             <View style={styles.activityContent}>
@@ -53,8 +56,7 @@ console.log(uniqueFacilities.map(facility => facility))
               </View>
               <TouchableOpacity
                 style={styles.signUpButton}
-                onPress={() => handleSignUp(facility.link)}
-              >
+                onPress={() => handleSignUp(facility.link)}>
                 <Text style={styles.signUpText}>Sign up</Text>
               </TouchableOpacity>
             </View>
@@ -71,7 +73,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: 'black',
-    paddingHorizontal: 16,
+    // paddingHorizontal: 26,
   },
   title: {
     fontSize: 28,
@@ -85,6 +87,7 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     overflow: 'hidden',
     backgroundColor: '#1a1a1a',
+    marginHorizontal: 10,
   },
   activityImage: {
     width: '100%',
