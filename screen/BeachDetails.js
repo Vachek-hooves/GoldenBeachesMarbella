@@ -20,6 +20,7 @@ const BeachDetails = ({route, navigation}) => {
   const {beach} = route.params;
   const [showMap, setShowMap] = useState(false);
   const {favorites, toggleFavorite} = useStoreProvider();
+  console.log(beach.facilities);
 
   const isFavorite = favorites.includes(beach.id);
 
@@ -39,10 +40,10 @@ const BeachDetails = ({route, navigation}) => {
     }
   };
 
-  const truncateText = (text, maxLength) => {
-    if (text.length <= maxLength) return text;
-    return text.substring(0, maxLength) + '...';
-  };
+  // const truncateText = (text, maxLength) => {
+  //   if (text.length <= maxLength) return text;
+  //   return text.substring(0, maxLength) + '...';
+  // };
 
   const handleFacilityPress = facility => {
     navigation.navigate('FacilitiesDetails', {facility});
@@ -137,9 +138,9 @@ const BeachDetails = ({route, navigation}) => {
                 onPress={() => handleFacilityPress(facility)}>
                 <View style={styles.facilityContent}>
                   <Text style={styles.facilityName}>{facility.name}</Text>
-                  <Text style={styles.facilityDescription}>
+                  {/* <Text style={styles.facilityDescription}>
                     {truncateText(facility.description, 20)}
-                  </Text>
+                  </Text> */}
                 </View>
                 <View style={styles.arrowContainer}>
                   {/* <Image

@@ -29,7 +29,7 @@ const AddBeach = ({navigation}) => {
     },
     description: '',
     image: '',
-    facilities: [{name: '', text: ''}],
+    facilities: [{name: '', text: '', id: Date.now().toString()}],
   });
 
   const handleImagePick = async () => {
