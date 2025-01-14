@@ -45,6 +45,7 @@ const FacilitiesDetails = ({route, navigation}) => {
             <Text style={styles.signUpText}>Visit</Text>
           </TouchableOpacity>
         </View>
+      <View style={{height: 50}} />
       </ScrollView>
     </SafeAreaView>
   );
