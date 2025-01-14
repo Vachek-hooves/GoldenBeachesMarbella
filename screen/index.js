@@ -5,6 +5,7 @@ import Activities from './Activities';
 import Setting from './Setting';
 import BeachDetails from './BeachDetails';
 import AddBeach from './AddBeach';
+import FacilitiesDetails from './FacilitiesDetails';
 
 export {
   IntroScreen,
@@ -14,4 +15,5 @@ export {
   Setting,
   BeachDetails,
   AddBeach,
+  FacilitiesDetails,
 };

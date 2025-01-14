@@ -1,8 +1,9 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {NavigationContainer} from '@react-navigation/native';
 import {StoreProvider} from './store/context';
-import {AddBeach, BeachDetails, IntroScreen} from './screen';
+import {AddBeach, BeachDetails, FacilitiesDetails, IntroScreen} from './screen';
 import TabNavigation from './TabNavigation';
+
 
 const Stack = createNativeStackNavigator();
 
@@ -20,6 +21,10 @@ function App() {
           <Stack.Screen name="TabNavigation" component={TabNavigation} />
           <Stack.Screen name="BeachDetails" component={BeachDetails} />
           <Stack.Screen name="AddBeach" component={AddBeach} />
+          <Stack.Screen
+            name="FacilitiesDetails"
+            component={FacilitiesDetails}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </StoreProvider>

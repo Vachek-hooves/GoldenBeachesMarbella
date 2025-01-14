@@ -35,7 +35,11 @@ const BeachDetails = ({route, navigation}) => {
     return text.substring(0, maxLength) + '...';
   };
 
-  console.log(beach.facilities);
+  const handleFacilityPress = (facility) => {
+    navigation.navigate('FacilitiesDetails', { facility });
+  };
+
+  // console.log(beach.facilities);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -113,20 +117,24 @@ const BeachDetails = ({route, navigation}) => {
           <View style={styles.facilitiesSection}>
             <Text style={styles.facilitiesTitle}>Facilities on site</Text>
             {beach.facilities.map((facility) => (
-              <View key={facility.id} style={styles.facilityItem}>
+              <TouchableOpacity
+                key={facility.id}
+                style={styles.facilityItem}
+                onPress={() => handleFacilityPress(facility)}
+              >
                 <View style={styles.facilityContent}>
                   <Text style={styles.facilityName}>{facility.name}</Text>
                   <Text style={styles.facilityDescription}>
-                    {truncateText(facility.description, 40)}
+                    {truncateText(facility.description, 20)}
                   </Text>
                 </View>
-                <TouchableOpacity
-                  style={styles.signUpButton}
-                  onPress={() => handleSignUp(facility.link)}
-                >
-                  <Text style={styles.signUpText}>Sign up</Text>
-                </TouchableOpacity>
-              </View>
+                <View style={styles.arrowContainer}>
+                  {/* <Image
+                    source={require('../assets/icons/arrow.png')}
+                    style={styles.arrowIcon}
+                  /> */}
+                </View>
+              </TouchableOpacity>
             ))}
           </View>
         </View>
@@ -366,5 +374,13 @@ const styles = StyleSheet.create({
   openMapsText: {
     color: 'black',
     fontWeight: 'bold',
+  },
+  arrowContainer: {
+    padding: 8,
+  },
+  arrowIcon: {
+    width: 20,
+    height: 20,
+    tintColor: 'white',
   },
 });
