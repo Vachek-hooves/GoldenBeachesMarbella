@@ -13,6 +13,8 @@ import React, {useState} from 'react';
 import {useStoreProvider} from '../store/context';
 import MainLayout from '../components/Layout/MainLayout';
 import Main from './Main';
+import LightMode from '../components/ui/LightMode';
+import DarkMode from '../components/ui/DarkMode';
 
 const Settings = () => {
   const {isDarkMode, toggleTheme, theme} = useStoreProvider();
@@ -68,73 +70,73 @@ const Settings = () => {
     <MainLayout>
       {/* <SafeAreaView
         style={[styles.container, {backgroundColor: theme.background}]}> */}
-        <Text style={[styles.title, {color: theme.text}]}>Settings</Text>
+      <Text style={[styles.title, {color: theme.text}]}>Settings</Text>
 
-        <View style={styles.settingsContainer}>
-          <TouchableOpacity style={styles.settingItem} onPress={handleSupport}>
-            <View style={styles.settingLeft}>
-              <Text style={styles.settingText}>Support</Text>
-            </View>
-            <View
-              style={[styles.iconContainer, {backgroundColor: '#4CAF50' + 90}]}>
-              {/* <Text style={styles.icon}>👤</Text>
-               */}
-              <Image
-                source={require('../assets/icons/support.png')}
-                style={styles.icon}
-              />
-            </View>
-          </TouchableOpacity>
+      <View style={styles.settingsContainer}>
+        <TouchableOpacity style={styles.settingItem} onPress={handleSupport}>
+          <View style={styles.settingLeft}>
+            <Text style={styles.settingText}>Support</Text>
+          </View>
+          <View
+            style={[styles.iconContainer, {backgroundColor: '#4CAF50' + 90}]}>
+            {/* <Text style={styles.icon}>👤</Text>
+             */}
+            <Image
+              source={require('../assets/icons/support.png')}
+              style={styles.icon}
+            />
+          </View>
+        </TouchableOpacity>
 
-          <TouchableOpacity style={styles.settingItem} onPress={handleRateUs}>
-            <View style={styles.settingLeft}>
-              <Text style={styles.settingText}>Rate Us</Text>
-            </View>
-            <View
-              style={[styles.iconContainer, {backgroundColor: '#4CAF50' + 90}]}>
-              {/* <Text style={styles.icon}>✨</Text> */}
-              <Image
-                source={require('../assets/icons/rate.png')}
-                style={styles.icon}
-              />
-            </View>
-          </TouchableOpacity>
+        <TouchableOpacity style={styles.settingItem} onPress={handleRateUs}>
+          <View style={styles.settingLeft}>
+            <Text style={styles.settingText}>Rate Us</Text>
+          </View>
+          <View
+            style={[styles.iconContainer, {backgroundColor: '#4CAF50' + 90}]}>
+            {/* <Text style={styles.icon}>✨</Text> */}
+            <Image
+              source={require('../assets/icons/rate.png')}
+              style={styles.icon}
+            />
+          </View>
+        </TouchableOpacity>
 
-          <TouchableOpacity
-            style={styles.settingItem}
-            onPress={handlePrivacyPolicy}>
-            <View style={styles.settingLeft}>
-              <Text style={styles.settingText}>Privacy Policy</Text>
-            </View>
-            <View
-              style={[styles.iconContainer, {backgroundColor: '#4CAF50' + 90}]}>
-              {/* <Text style={styles.icon}>🛡️</Text> */}
-              <Image
-                source={require('../assets/icons/privacy.png')}
-                style={styles.icon}
-              />
-            </View>
-          </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.settingItem}
+          onPress={handlePrivacyPolicy}>
+          <View style={styles.settingLeft}>
+            <Text style={styles.settingText}>Privacy Policy</Text>
+          </View>
+          <View
+            style={[styles.iconContainer, {backgroundColor: '#4CAF50' + 90}]}>
+            {/* <Text style={styles.icon}>🛡️</Text> */}
+            <Image
+              source={require('../assets/icons/privacy.png')}
+              style={styles.icon}
+            />
+          </View>
+        </TouchableOpacity>
 
-          <View style={[styles.settingItem, {backgroundColor: theme.surface}]}>
-            <View style={styles.settingLeft}>
-              <Text style={[styles.settingText, {color: theme.text}]}>
-                Theme
-              </Text>
-            </View>
-            <View style={styles.themeContainer}>
-              <Text style={styles.icon}>🌙</Text>
-              <Switch
-                value={isDarkMode}
-                onValueChange={toggleTheme}
-                trackColor={{false: '#767572', true: theme.accent}}
-                thumbColor={isDarkMode ? '#f5dd4b' : '#f4f3f4'}
-                ios_backgroundColor="#3e3e3a"
-                style={styles.switch}
-              />
-            </View>
+        <View style={[styles.settingItem, {backgroundColor: theme.surface}]}>
+          <View style={styles.settingLeft}>
+            <Text style={[styles.settingText, {color: theme.text}]}>Theme</Text>
+          </View>
+          <View style={styles.themeContainer}>
+            {/* <Text style={styles.icon}>🌙</Text> */}
+            {isDarkMode ? <LightMode /> : <DarkMode />}
+            {/* <LightMode /> */}
+            <Switch
+              value={isDarkMode}
+              onValueChange={toggleTheme}
+              trackColor={{false: '#767572', true: theme.accent}}
+              thumbColor={isDarkMode ? '#f5dd4b' : '#f4f3f4'}
+              ios_backgroundColor="#3e3e3a"
+              style={styles.switch}
+            />
           </View>
         </View>
+      </View>
       {/* </SafeAreaView> */}
     </MainLayout>
   );
@@ -190,10 +192,14 @@ const styles = StyleSheet.create({
     gap: 8,
   },
   icon: {
-    // fontSize: 16,
+    fontSize: 32,
     width: 60,
     height: 60,
     padding: 10,
+    textAlign: 'center',
+    // justifyContent: 'center',
+    // alignItems: 'center',
+    alignSelf: 'center',
   },
   switch: {
     transform: [{scale: 0.8}],

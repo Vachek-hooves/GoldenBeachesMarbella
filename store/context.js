@@ -1,42 +1,61 @@
 import React, {createContext, useState, useContext, useEffect} from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {BEACHES} from '../data/beaches';
-import {themes} from '../data/themes';
 
 export const StoreContext = createContext({});
+
+// Define theme objects
+export const themes = {
+  light: {
+    background: '#FFFFFF',
+    surface: '#F5F5F5',
+    text: '#000000',
+    textSecondary: '#666666',
+    accent: '#FFD700',
+  },
+  dark: {
+    background: '#000000',
+    surface: '#1a1a1a',
+    text: '#FFFFFF',
+    textSecondary: '#666666',
+    accent: '#FFD700',
+  },
+};
 
 export const StoreProvider = ({children}) => {
   const [beaches, setBeaches] = useState([]);
   const [favorites, setFavorites] = useState([]);
   const [isDarkMode, setIsDarkMode] = useState(true);
+  // Initialize theme with dark theme by default
   const [theme, setTheme] = useState(themes.dark);
 
-  // Initialize beaches and favorites data
   useEffect(() => {
     const initializeData = async () => {
       try {
-        // Check if beaches exist in AsyncStorage
-        const storedBeaches = await AsyncStorage.getItem('beaches');
-        const storedFavorites = await AsyncStorage.getItem('favorites');
-        const storedTheme = await AsyncStorage.getItem('theme');
+        const [storedBeaches, storedFavorites, storedTheme] = await Promise.all([
+          AsyncStorage.getItem('beaches'),
+          AsyncStorage.getItem('favorites'),
+          AsyncStorage.getItem('theme'),
+        ]);
+
+        // Initialize beaches
         if (!storedBeaches) {
-          // If no beaches in storage, store the default BEACHES data
           await AsyncStorage.setItem('beaches', JSON.stringify(BEACHES));
           setBeaches(BEACHES);
         } else {
-          // If beaches exist in storage, load them
           setBeaches(JSON.parse(storedBeaches));
         }
 
-        // Load favorites if they exist
+        // Initialize favorites
         if (storedFavorites) {
           setFavorites(JSON.parse(storedFavorites));
         }
 
-        // Load theme if it exists
-        if (storedTheme) {
-          setIsDarkMode(JSON.parse(storedTheme));
-          setTheme(themes[JSON.parse(storedTheme)]);
+        // Initialize theme
+        if (storedTheme !== null) {
+          const isStoredDarkMode = JSON.parse(storedTheme);
+          setIsDarkMode(isStoredDarkMode);
+          setTheme(isStoredDarkMode ? themes.dark : themes.light);
         }
       } catch (error) {
         console.error('Error initializing data:', error);
