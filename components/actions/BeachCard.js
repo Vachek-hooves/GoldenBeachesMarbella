@@ -1,18 +1,33 @@
 import {StyleSheet, Text, View, TouchableOpacity, Image} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
+import { useStoreProvider } from '../../store/context';
 
 const BeachCard = ({beach}) => {
   const navigation = useNavigation();
+  const { favorites, toggleFavorite } = useStoreProvider();
+
+  const isFavorite = favorites.includes(beach.id);
+
+  const handleFavoritePress = (e) => {
+    e.stopPropagation(); // Prevent triggering the card's onPress
+    toggleFavorite(beach.id);
+  };
 
   return (
     <TouchableOpacity
       style={styles.card}
       onPress={() => navigation.navigate('BeachDetails', {beach})}>
       <Image source={{uri: beach.image}} style={styles.beachImage} />
-      <TouchableOpacity style={styles.favoriteButton}>
+      <TouchableOpacity 
+        style={styles.favoriteButton}
+        onPress={handleFavoritePress}
+      >
         <Image
           source={require('../../assets/icons/heart.png')}
-          style={styles.favoriteButton}
+          style={[
+            styles.favoriteIcon,
+            isFavorite && styles.favoriteIconActive
+          ]}
         />
       </TouchableOpacity>
       <View style={styles.cardContent}>
@@ -59,5 +74,13 @@ const styles = StyleSheet.create({
     color: 'gray',
     fontSize: 12,
     marginTop: 4,
+  },
+  favoriteIcon: {
+    width: 28,
+    height: 24,
+    tintColor: 'white',
+  },
+  favoriteIconActive: {
+    tintColor: '#FFD700', // or any color you want for active state
   },
 });

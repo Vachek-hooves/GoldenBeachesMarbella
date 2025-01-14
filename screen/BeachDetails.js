@@ -12,19 +12,28 @@ import {
 } from 'react-native';
 import React, {useState} from 'react';
 import MapView, {Marker} from 'react-native-maps';
+import {useStoreProvider} from '../store/context';
 
 const {width} = Dimensions.get('window');
 
 const BeachDetails = ({route, navigation}) => {
   const {beach} = route.params;
   const [showMap, setShowMap] = useState(false);
+  const {favorites, toggleFavorite} = useStoreProvider();
+
+  const isFavorite = favorites.includes(beach.id);
+
+  const handleFavoritePress = e => {
+    e.stopPropagation(); // Prevent triggering the card's onPress
+    toggleFavorite(beach.id);
+  };
 
   const handleOpenMaps = () => {
     const url = `https://www.google.com/maps/search/?api=1&query=${beach.location.lat},${beach.location.lng}`;
     Linking.openURL(url);
   };
 
-  const handleSignUp = (facilityLink) => {
+  const handleSignUp = facilityLink => {
     if (facilityLink) {
       Linking.openURL(facilityLink);
     }
@@ -35,8 +44,8 @@ const BeachDetails = ({route, navigation}) => {
     return text.substring(0, maxLength) + '...';
   };
 
-  const handleFacilityPress = (facility) => {
-    navigation.navigate('FacilitiesDetails', { facility });
+  const handleFacilityPress = facility => {
+    navigation.navigate('FacilitiesDetails', {facility});
   };
 
   // console.log(beach.facilities);
@@ -54,10 +63,15 @@ const BeachDetails = ({route, navigation}) => {
               style={styles.backIcon}
             />
           </TouchableOpacity>
-          <TouchableOpacity style={styles.favoriteButton}>
+          <TouchableOpacity
+            style={styles.favoriteButton}
+            onPress={handleFavoritePress}>
             <Image
               source={require('../assets/icons/heart.png')}
-              style={styles.favoriteIcon}
+              style={[
+                styles.favoriteIcon,
+                isFavorite && styles.favoriteIconActive,
+              ]}
             />
           </TouchableOpacity>
         </View>
@@ -116,12 +130,11 @@ const BeachDetails = ({route, navigation}) => {
 
           <View style={styles.facilitiesSection}>
             <Text style={styles.facilitiesTitle}>Facilities on site</Text>
-            {beach.facilities.map((facility) => (
+            {beach.facilities.map(facility => (
               <TouchableOpacity
                 key={facility.id}
                 style={styles.facilityItem}
-                onPress={() => handleFacilityPress(facility)}
-              >
+                onPress={() => handleFacilityPress(facility)}>
                 <View style={styles.facilityContent}>
                   <Text style={styles.facilityName}>{facility.name}</Text>
                   <Text style={styles.facilityDescription}>
@@ -382,5 +395,13 @@ const styles = StyleSheet.create({
     width: 20,
     height: 20,
     tintColor: 'white',
+  },
+  favoriteIcon: {
+    width: 28,
+    height: 24,
+    tintColor: 'white',
+  },
+  favoriteIconActive: {
+    tintColor: '#FFD700', // or any color you want for active state
   },
 });
