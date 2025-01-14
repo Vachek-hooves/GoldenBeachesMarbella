@@ -9,6 +9,7 @@ import {
   Modal,
   Dimensions,
   Linking,
+  Alert,
 } from 'react-native';
 import React, {useState} from 'react';
 import MapView, {Marker} from 'react-native-maps';
@@ -19,7 +20,7 @@ const {width} = Dimensions.get('window');
 const BeachDetails = ({route, navigation}) => {
   const {beach} = route.params;
   const [showMap, setShowMap] = useState(false);
-  const {favorites, toggleFavorite} = useStoreProvider();
+  const {favorites, toggleFavorite, deleteBeach} = useStoreProvider();
   console.log(beach.facilities);
 
   const isFavorite = favorites.includes(beach.id);
@@ -49,6 +50,31 @@ const BeachDetails = ({route, navigation}) => {
     navigation.navigate('FacilitiesDetails', {facility});
   };
 
+  const handleDeleteBeach = () => {
+    Alert.alert(
+      'Delete Beach',
+      'Are you sure you want to delete this beach? This action cannot be undone.',
+      [
+        {
+          text: 'Cancel',
+          style: 'cancel',
+        },
+        {
+          text: 'Delete',
+          style: 'destructive',
+          onPress: async () => {
+            const success = await deleteBeach(beach.id);
+            if (success) {
+              navigation.goBack();
+            } else {
+              Alert.alert('Error', 'Failed to delete beach. Please try again.');
+            }
+          },
+        },
+      ],
+    );
+  };
+
   // console.log(beach.facilities);
 
   return (
@@ -73,6 +99,14 @@ const BeachDetails = ({route, navigation}) => {
                 styles.favoriteIcon,
                 isFavorite && styles.favoriteIconActive,
               ]}
+            />
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.deleteButton}
+            onPress={handleDeleteBeach}>
+            <Image
+              source={require('../assets/icons/trash.png')}
+              style={styles.deleteIcon}
             />
           </TouchableOpacity>
         </View>
@@ -404,5 +438,18 @@ const styles = StyleSheet.create({
   },
   favoriteIconActive: {
     tintColor: '#FFD700', // or any color you want for active state
+  },
+  deleteButton: {
+    position: 'absolute',
+    top: '60%',
+    right: 15,
+    backgroundColor: 'rgba(0,0,0,0.5)',
+    padding: 8,
+    borderRadius: 20,
+  },
+  deleteIcon: {
+    width: 28,
+    height: 34,
+    tintColor: '#FF4444',
   },
 });

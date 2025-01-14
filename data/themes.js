@@ -1,6 +1,7 @@
 export const themes = {
     light: {
-      background: '#FFFFFF',
+      background: '#FFFFFF',// create nice Linear Gradient
+      
       surface: '#F5F5F5',
       text: '#000000',
       textSecondary: '#666666',

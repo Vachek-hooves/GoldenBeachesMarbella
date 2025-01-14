@@ -82,6 +82,27 @@ export const StoreProvider = ({children}) => {
     }
   };
 
+  const deleteBeach = async (beachId) => {
+    try {
+      // Remove beach from beaches array
+      const updatedBeaches = beaches.filter(beach => beach.id !== beachId);
+      await AsyncStorage.setItem('beaches', JSON.stringify(updatedBeaches));
+      setBeaches(updatedBeaches);
+
+      // Remove from favorites if it exists there
+      if (favorites.includes(beachId)) {
+        const updatedFavorites = favorites.filter(id => id !== beachId);
+        await AsyncStorage.setItem('favorites', JSON.stringify(updatedFavorites));
+        setFavorites(updatedFavorites);
+      }
+
+      return true; // Return success
+    } catch (error) {
+      console.error('Error deleting beach:', error);
+      return false; // Return failure
+    }
+  };
+
   const value = {
     beaches,
     updateBeaches,
@@ -90,6 +111,7 @@ export const StoreProvider = ({children}) => {
     theme,
     isDarkMode,
     toggleTheme,
+    deleteBeach,
   };
 
   return (

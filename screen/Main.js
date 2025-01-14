@@ -11,8 +11,10 @@ import {useStoreProvider} from '../store/context';
 import AddBeach from '../components/ui/IconBtn/AddBeach';
 import BeachCard from '../components/actions/BeachCard';
 
+
+
 const Main = () => {
-  const {beaches} = useStoreProvider();
+  const {beaches, theme} = useStoreProvider();
   const [activeTab, setActiveTab] = useState('General');
 
   return (
