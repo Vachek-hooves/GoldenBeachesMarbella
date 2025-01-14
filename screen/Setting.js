@@ -68,7 +68,8 @@ const Settings = () => {
           <View style={styles.settingLeft}>
             <Text style={styles.settingText}>Support</Text>
           </View>
-          <View style={[styles.iconContainer, {backgroundColor: '#151515'}]}>
+          <View
+            style={[styles.iconContainer, {backgroundColor: '#4CAF50' + 90}]}>
             {/* <Text style={styles.icon}>👤</Text>
              */}
             <Image
@@ -82,7 +83,8 @@ const Settings = () => {
           <View style={styles.settingLeft}>
             <Text style={styles.settingText}>Rate Us</Text>
           </View>
-          <View style={[styles.iconContainer]}>
+          <View
+            style={[styles.iconContainer, {backgroundColor: '#4CAF50' + 90}]}>
             {/* <Text style={styles.icon}>✨</Text> */}
             <Image
               source={require('../assets/icons/rate.png')}
@@ -97,7 +99,8 @@ const Settings = () => {
           <View style={styles.settingLeft}>
             <Text style={styles.settingText}>Privacy Policy</Text>
           </View>
-          <View style={[styles.iconContainer, {backgroundColor: '#4CAF50'}]}>
+          <View
+            style={[styles.iconContainer, {backgroundColor: '#4CAF50' + 90}]}>
             {/* <Text style={styles.icon}>🛡️</Text> */}
             <Image
               source={require('../assets/icons/privacy.png')}
