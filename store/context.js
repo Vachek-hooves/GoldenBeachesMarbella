@@ -1,26 +1,27 @@
 import React, {createContext, useState, useContext, useEffect} from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {BEACHES} from '../data/beaches';
+import {themes} from '../data/themes';
 
 export const StoreContext = createContext({});
 
 // Define theme objects
-export const themes = {
-  light: {
-    background: '#FFFFFF',
-    surface: '#F5F5F5',
-    text: '#000000',
-    textSecondary: '#666666',
-    accent: '#FFD700',
-  },
-  dark: {
-    background: '#000000',
-    surface: '#1a1a1a',
-    text: '#FFFFFF',
-    textSecondary: '#666666',
-    accent: '#FFD700',
-  },
-};
+// export const themes = {
+//   light: {
+//     background: '#FFFFFF',
+//     surface: '#F5F5F5',
+//     text: '#000000',
+//     textSecondary: '#666666',
+//     accent: '#FFD700',
+//   },
+//   dark: {
+//     background: '#000000',
+//     surface: '#1a1a1a',
+//     text: '#FFFFFF',
+//     textSecondary: '#666666',
+//     accent: '#FFD700',
+//   },
+// };
 
 export const StoreProvider = ({children}) => {
   const [beaches, setBeaches] = useState([]);

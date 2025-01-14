@@ -10,17 +10,19 @@ import React, {useState} from 'react';
 import {useStoreProvider} from '../store/context';
 import AddBeach from '../components/ui/IconBtn/AddBeach';
 import BeachCard from '../components/actions/BeachCard';
-
-
+import MainLayout from '../components/Layout/MainLayout';
 
 const Main = () => {
   const {beaches, theme} = useStoreProvider();
   const [activeTab, setActiveTab] = useState('General');
 
   return (
-    <SafeAreaView style={styles.container}>
+    <MainLayout>
+      {/* <SafeAreaView style={styles.container}> */}
       <View style={styles.header}>
-        <Text style={styles.title}>Marbella Beaches</Text>
+        <Text style={[styles.title, {color: theme.text}]}>
+          Marbella Beaches
+        </Text>
         <TouchableOpacity>
           {/* <Ionicons name="heart-outline" size={24} color="#FFD700" /> */}
         </TouchableOpacity>
@@ -59,7 +61,8 @@ const Main = () => {
         </View>
       </ScrollView>
       <AddBeach />
-    </SafeAreaView>
+      {/* </SafeAreaView> */}
+    </MainLayout>
   );
 };
 

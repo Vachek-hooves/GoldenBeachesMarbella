@@ -11,10 +11,13 @@ import {
 } from 'react-native';
 import React from 'react';
 import {BEACHES} from '../data/beaches';
+import {useStoreProvider} from '../store/context';
+import MainLayout from '../components/Layout/MainLayout';
 
 const {width} = Dimensions.get('window');
 
 const Activities = ({navigation}) => {
+  const {theme} = useStoreProvider();
   // Get unique facilities from all beaches
   const uniqueFacilities = Array.from(
     new Set(
@@ -35,8 +38,11 @@ const Activities = ({navigation}) => {
   };
   // console.log(uniqueFacilities.map(facility => facility));
   return (
-    <SafeAreaView style={styles.container}>
-      <Text style={styles.title}>Marbella Activities</Text>
+    <MainLayout>
+      {/* <SafeAreaView style={styles.container}> */}
+      <Text style={[styles.title, {color: theme.text}]}>
+        Marbella Activities
+      </Text>
       <ScrollView showsVerticalScrollIndicator={false}>
         {uniqueFacilities.map(facility => (
           <TouchableOpacity
@@ -63,7 +69,8 @@ const Activities = ({navigation}) => {
           </TouchableOpacity>
         ))}
       </ScrollView>
-    </SafeAreaView>
+      {/* </SafeAreaView> */}
+    </MainLayout>
   );
 };
 
@@ -81,6 +88,7 @@ const styles = StyleSheet.create({
     color: 'white',
     marginTop: 16,
     marginBottom: 24,
+    marginHorizontal: 20,
   },
   activityCard: {
     marginBottom: 16,

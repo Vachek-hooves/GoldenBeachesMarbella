@@ -6,9 +6,12 @@ import {
   TouchableOpacity,
   Image,
 } from 'react-native';
-import React, { useState } from 'react';
+import React, {useState} from 'react';
+import {useStoreProvider} from '../store/context';
+import MainLayout from '../components/Layout/MainLayout';
 
 const Reviews = () => {
+  const {theme} = useStoreProvider();
   const [activeTab, setActiveTab] = useState('Main');
 
   const renderSegmentControl = () => (
@@ -18,14 +21,12 @@ const Reviews = () => {
           styles.segmentButton,
           activeTab === 'Main' && styles.segmentButtonActive,
         ]}
-        onPress={() => setActiveTab('Main')}
-      >
+        onPress={() => setActiveTab('Main')}>
         <Text
           style={[
             styles.segmentText,
             activeTab === 'Main' && styles.segmentTextActive,
-          ]}
-        >
+          ]}>
           Main
         </Text>
       </TouchableOpacity>
@@ -34,14 +35,12 @@ const Reviews = () => {
           styles.segmentButton,
           activeTab === 'Deleted' && styles.segmentButtonActive,
         ]}
-        onPress={() => setActiveTab('Deleted')}
-      >
+        onPress={() => setActiveTab('Deleted')}>
         <Text
           style={[
             styles.segmentText,
             activeTab === 'Deleted' && styles.segmentTextActive,
-          ]}
-        >
+          ]}>
           Deleted
         </Text>
       </TouchableOpacity>
@@ -54,7 +53,7 @@ const Reviews = () => {
         source={require('../assets/icons/bigUmbrells.png')}
         style={styles.emptyStateImage}
       />
-      <Text style={styles.emptyStateText}>
+      <Text style={[styles.emptyStateText, {color: theme.text}]}>
         There aren't any reviews you add yet,{'\n'}you can do it now
       </Text>
       <TouchableOpacity style={styles.addReviewButton}>
@@ -64,11 +63,13 @@ const Reviews = () => {
   );
 
   return (
-    <SafeAreaView style={styles.container}>
-      <Text style={styles.title}>Marbella Reviews</Text>
+    <MainLayout>
+      {/* <SafeAreaView style={styles.container}> */}
+      <Text style={[styles.title, {color: theme.text}]}>Marbella Reviews</Text>
       {renderSegmentControl()}
       {renderEmptyState()}
-    </SafeAreaView>
+      {/* </SafeAreaView> */}
+    </MainLayout>
   );
 };
 
@@ -86,6 +87,7 @@ const styles = StyleSheet.create({
     color: 'white',
     marginTop: 16,
     marginBottom: 24,
+    marginHorizontal: 10,
   },
   segmentContainer: {
     flexDirection: 'row',
@@ -93,6 +95,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     padding: 4,
     marginBottom: 32,
+    marginHorizontal: 10,
   },
   segmentButton: {
     flex: 1,
