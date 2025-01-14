@@ -104,7 +104,7 @@ export const BEACHES = [
       {
         image:
           'https://checkyeti.imgix.net/images/prod/products/25243/Marbella-Renting-Boat-3-5',
-        id: 1,
+        id: 7,
         name: 'Jet Ski Rental',
         description:
           'Renting jet skis for fast movement on the water. If you are looking for an exhilarating way to explore the beautiful coastline or enjoy a day out on the lake, renting a jet ski is the perfect option. Imagine gliding across the shimmering surface of the water, the wind in your hair, and the sun shining down as you speed along. Jet skis are designed for both fun and adventure, allowing you to navigate through waves and take sharp turns with ease. Many rental companies offer a variety of models to choose from, catering to both beginners and experienced riders. Safety is a priority, so you will receive a briefing on how to operate the jet ski and adhere to local regulations. Whether you are planning a solo adventure or a thrilling day with friends, jet skiing is an unforgettable experience. Plus, it is a fantastic way to connect with nature and enjoy the stunning views from a unique perspective. So, grab your life jacket, hop on a jet ski, and get ready for an adrenaline-pumping ride!',
@@ -113,7 +113,7 @@ export const BEACHES = [
       {
         image:
           'https://cdn1.yumping.com/emp/fotos/28/E/000012699/640/kayak3.jpg',
-        id: 3,
+        id: 8,
         name: 'Kayaking',
         description:
           'Kayaking is a fun and relaxing activity that allows you to explore the water in a peaceful manner. Imagine gliding through the calm waters of a lake or river, surrounded by the natural beauty of the surrounding landscape. Kayaking is a great way to connect with nature and enjoy the stunning views from a unique perspective. Many rental companies offer different packages, including single or double kayaks, and some even offer guided tours. Safety is always a priority, so you will receive a briefing on how to use the equipment and adhere to local regulations. Whether you are looking for a peaceful way to enjoy the scenery or a fun activity for the whole family, kayaking is an unforgettable experience. So, grab your paddle, hop in a kayak, and get ready for a relaxing and scenic ride!',
@@ -134,7 +134,7 @@ export const BEACHES = [
       {
         image:
           'https://costadeluxe.es/wp-content/uploads/tour-kayak-marbella.jpg',
-        id: 3,
+        id: 9,
         name: 'Kayaking',
         description:
           'Kayaking is a fun and relaxing activity that allows you to explore the water in a peaceful manner. Imagine gliding through the calm waters of a lake or river, surrounded by the natural beauty of the surrounding landscape. Kayaking is a great way to connect with nature and enjoy the stunning views from a unique perspective. Many rental companies offer different packages, including single or double kayaks, and some even offer guided tours. Safety is always a priority, so you will receive a briefing on how to use the equipment and adhere to local regulations. Whether you are looking for a peaceful way to enjoy the scenery or a fun activity for the whole family, kayaking is an unforgettable experience. So, grab your paddle, hop in a kayak, and get ready for a relaxing and scenic ride!',
@@ -143,7 +143,7 @@ export const BEACHES = [
       {
         image:
           'https://www.vistabellacostarica.com/wp-content/uploads/2022/06/273772376_487508176110592_3038011776860382334_n.jpg',
-        id: 4,
+        id: 10,
         name: 'Surfing',
         description:
           'Surfing lessons with a professional instructor. Are you ready to ride the waves and embrace the thrill of surfing? Our surfing lessons are designed for all skill levels, whether you are a complete beginner or looking to refine your technique. With a professional instructor by your side, you will learn the fundamentals of surfing in a safe and supportive environment.During the lessons, you will start with a brief introduction to the equipment and safety protocols. Your instructor will guide you through the basics of paddling, popping up, and maintaining balance on the board. You will also receive personalized tips to help you improve your skills quickly.As you progress, you will have the opportunity to practice in the water, catching your first waves with confidence. The instructor will be there to provide real-time feedback and encouragement, ensuring you have a fun and rewarding experience.Join us for an unforgettable adventure on the ocean, where you will not only learn to surf but also connect with nature and meet fellow surf enthusiasts. Sign up today and get ready to make waves!',
@@ -163,7 +163,7 @@ export const BEACHES = [
     facilities: [
       {
         image: 'https://www.marbella.gr/app/uploads/2023/05/marb15-0477.jpg',
-        id: 3,
+        id: 11,
         name: 'Kayaking',
         description:
           'Kayaking is a fun and relaxing activity that allows you to explore the water in a peaceful manner. Imagine gliding through the calm waters of a lake or river, surrounded by the natural beauty of the surrounding landscape. Kayaking is a great way to connect with nature and enjoy the stunning views from a unique perspective. Many rental companies offer different packages, including single or double kayaks, and some even offer guided tours. Safety is always a priority, so you will receive a briefing on how to use the equipment and adhere to local regulations. Whether you are looking for a peaceful way to enjoy the scenery or a fun activity for the whole family, kayaking is an unforgettable experience. So, grab your paddle, hop in a kayak, and get ready for a relaxing and scenic ride!',
@@ -172,7 +172,7 @@ export const BEACHES = [
       {
         image:
           'https://marbellasurfinn.com/wp-content/uploads/2019/07/surf1.jpg',
-        id: 4,
+        id: 12,
         name: 'Surfing',
         description:
           'Surfing lessons with a professional instructor. Are you ready to ride the waves and embrace the thrill of surfing? Our surfing lessons are designed for all skill levels, whether you are a complete beginner or looking to refine your technique. With a professional instructor by your side, you will learn the fundamentals of surfing in a safe and supportive environment.During the lessons, you will start with a brief introduction to the equipment and safety protocols. Your instructor will guide you through the basics of paddling, popping up, and maintaining balance on the board. You will also receive personalized tips to help you improve your skills quickly.As you progress, you will have the opportunity to practice in the water, catching your first waves with confidence. The instructor will be there to provide real-time feedback and encouragement, ensuring you have a fun and rewarding experience.Join us for an unforgettable adventure on the ocean, where you will not only learn to surf but also connect with nature and meet fellow surf enthusiasts. Sign up today and get ready to make waves!',
@@ -181,7 +181,7 @@ export const BEACHES = [
       {
         image:
           'https://dnwp63qf32y8i.cloudfront.net/9491f3b4655259410214396efa9245582ee0da0f',
-        id: 6,
+        id: 13,
         name: 'Sand Sculptures',
         description:
           'Workshops for creating sand figures.Join us for an exciting series of workshops designed for both beginners and experienced sand sculptors! Our workshops will take place on the beautiful sandy beaches of Sunny Cove, where the sun shines bright and the waves create the perfect backdrop for creativity. Each session will be led by professional sand sculptors who will guide you through the art of sand figure creation, sharing tips and techniques to help you bring your imaginative designs to life.In these workshops, you will learn about the different types of sand, the tools needed for sculpting, and the best techniques for building sturdy structures. We will cover everything from basic shapes to intricate designs, ensuring that everyone can find their own style. Participants will have the opportunity to work on individual projects or collaborate with others to create larger, more complex sculptures.Whether you are looking to have fun with family and friends or want to hone your skills for competitions, our workshops are the perfect place to unleash your creativity. Don not miss out on this unique opportunity to make lasting memories while enjoying the sun and surf!',
