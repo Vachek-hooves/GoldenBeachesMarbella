@@ -33,7 +33,7 @@ const Activities = ({navigation}) => {
   const handleFacilityPress = facility => {
     navigation.navigate('FacilitiesDetails', {facility});
   };
-  console.log(uniqueFacilities.map(facility => facility));
+  // console.log(uniqueFacilities.map(facility => facility));
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.title}>Marbella Activities</Text>

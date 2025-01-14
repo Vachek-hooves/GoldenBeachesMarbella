@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   Switch,
   Linking,
+  Alert,
   Image,
 } from 'react-native';
 import React, {useState} from 'react';
@@ -13,9 +14,39 @@ import React, {useState} from 'react';
 const Settings = () => {
   const [isDarkMode, setIsDarkMode] = useState(true);
 
-  const handleSupport = () => {
-    Linking.openURL('mailto:sticklandcoscarelli29472@gmail.com'); // this not opened!
-    console.log('Support button pressed');
+  const handleSupport = async () => {
+    const email = 'support@marbellabeaches.com';
+    const subject = 'Support Request - Marbella Beaches App';
+    const mailtoUrl = `mailto:${email}?subject=${encodeURIComponent(subject)}`;
+
+    try {
+      const canOpen = await Linking.canOpenURL(mailtoUrl);
+      if (canOpen) {
+        await Linking.openURL(mailtoUrl);
+      } else {
+        // Fallback for when email client is not available
+        Alert.alert(
+          'Email Not Available',
+          'Please contact us at support@marbellabeaches.com',
+          [
+            {
+              text: 'Copy Email',
+              onPress: () => Clipboard.setString(email),
+            },
+            {
+              text: 'OK',
+              style: 'cancel',
+            },
+          ],
+        );
+      }
+    } catch (error) {
+      console.error('Error opening email client:', error);
+      Alert.alert(
+        'Error',
+        'Unable to open email client. Please try again later.',
+      );
+    }
   };
 
   const handleRateUs = () => {
