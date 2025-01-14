@@ -29,6 +29,12 @@ const BeachDetails = ({route, navigation}) => {
       Linking.openURL(facilityLink);
     }
   };
+
+  const truncateText = (text, maxLength) => {
+    if (text.length <= maxLength) return text;
+    return text.substring(0, maxLength) + '...';
+  };
+
   console.log(beach.facilities);
 
   return (
@@ -111,7 +117,7 @@ const BeachDetails = ({route, navigation}) => {
                 <View style={styles.facilityContent}>
                   <Text style={styles.facilityName}>{facility.name}</Text>
                   <Text style={styles.facilityDescription}>
-                    {facility.description}
+                    {truncateText(facility.description, 40)}
                   </Text>
                 </View>
                 <TouchableOpacity

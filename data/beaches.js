@@ -11,6 +11,8 @@ export const BEACHES = [
 
     facilities: [
       {
+        image:
+          'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/28/d0/77/25/caption.jpg?w=500&h=400&s=1',
         id: 1,
         name: 'Jet Ski Rental',
         description:
@@ -18,6 +20,8 @@ export const BEACHES = [
         link: 'https://www.getyourguide.com/-l1217/-tc67/?cmp=ga&cq_src=google_ads&cq_cmp=6754084680&cq_con=157895885928&cq_term=jet+ski+marbella&cq_med=&cq_plac=&cq_net=g&cq_pos=&cq_plt=gp&campaign_id=6754084680&adgroup_id=157895885928&target_id=kwd-336383641385&loc_physical_ms=9198817&match_type=e&ad_id=669301634040&keyword=jet+ski+marbella&ad_position=&feed_item_id=&placement=&device=c&partner_id=CD951&gad_source=1&gclid=Cj0KCQiAs5i8BhDmARIsAGE4xHwfZ0LH1WinskvIjsNLnsvT4RmTH8AH6a_iqThJkjywWM76nnbemV8aAndLEALw_wcB&visitor-id=JC8ZP46J07I27RXIWJO392CDEHFESZCY&locale_autoredirect_optout=true',
       },
       {
+        image:
+          'https://www.activitiesmarbella.es/sites/default/files/styles/product_full/public/product_thumbs/parasailing-with-fury-water-adventures_key-west_highslide-01560.jpg?h=cb3eb245&itok=3_4C-K5V',
         id: 2,
         name: 'Parasailing',
         description:
@@ -27,14 +31,18 @@ export const BEACHES = [
     ],
   },
   {
-    image: 'https://s3.amazonaws.com/turismorocha/atractivos/110/med/playa-del-faro-064806200-1513364293.jpg',
+    image:
+      'https://s3.amazonaws.com/turismorocha/atractivos/110/med/playa-del-faro-064806200-1513364293.jpg',
     name: 'Playa del Faro',
     id: 2,
     addresss: 'Malaga, Spain',
     location: {lat: 36.506836991755485, lng: -4.892083234624355},
-    description: 'Playa del Faro is a breathtaking beach nestled in the vibrant city of Marbella, Spain. Renowned for its soft golden sands and shimmering turquoise waters, this beach is a haven for sun seekers and adventure lovers alike.The shoreline is dotted with delightful beach bars and eateries, where guests can indulge in mouthwatering local dishes and cool beverages. With a welcoming atmosphere for families, Playa del Faro is perfect for a fun-filled day with friends and family, offering amenities like sun loungers, umbrellas, and clean showers. Whether you want to unwind in the sun or partake in various water sports, this beach is an essential stop in Marbella.',
+    description:
+      'Playa del Faro is a breathtaking beach nestled in the vibrant city of Marbella, Spain. Renowned for its soft golden sands and shimmering turquoise waters, this beach is a haven for sun seekers and adventure lovers alike.The shoreline is dotted with delightful beach bars and eateries, where guests can indulge in mouthwatering local dishes and cool beverages. With a welcoming atmosphere for families, Playa del Faro is perfect for a fun-filled day with friends and family, offering amenities like sun loungers, umbrellas, and clean showers. Whether you want to unwind in the sun or partake in various water sports, this beach is an essential stop in Marbella.',
     facilities: [
       {
+        image:
+          'https://media-cdn.tripadvisor.com/media/attractions-splice-spp-720x480/12/dd/ba/57.jpg',
         id: 3,
         name: 'Kayaking',
         description:
@@ -42,6 +50,8 @@ export const BEACHES = [
         link: 'https://www.getyourguide.com/-l1217/?cq_src=google_ads&cq_cmp=6654176541&cq_con=104984562672&cq_term=&cq_med=&cq_plac=&cq_net=g&cq_pos=&cq_plt=gp&campaign_id=6654176541&adgroup_id=104984562672&target_id=dsa-928996684231&loc_physical_ms=9198817&match_type=&ad_id=716248385756&keyword=&ad_position=&feed_item_id=&placement=&device=c&partner_id=CD951&gad_source=1&gclid=Cj0KCQiAs5i8BhDmARIsAGE4xHy8eD0Sd4-wEN7abfGsC-OrQnO1ZQbP2bi_gd6lJlnNxmiuE0ypv3caAogMEALw_wcB&redirector=697746',
       },
       {
+        image:
+          'https://checkyeti.imgix.net/images/prod/products/11962/surfing-lessons-marbella-beach-all-levels-biarritz-eco-surf-school-hero.jpg',
         id: 4,
         name: 'Surfing',
         description:
@@ -51,14 +61,18 @@ export const BEACHES = [
     ],
   },
   {
-    image: 'https://marinasdeandalucia.com/en/files/gallery/image/1511356052-puerto-deportivo-marbella-aerea1.jpg',
+    image:
+      'https://marinasdeandalucia.com/en/files/gallery/image/1511356052-puerto-deportivo-marbella-aerea1.jpg',
     name: 'Puerto Deportivo de Marbella',
     id: 3,
     addresss: 'S-N, 29602 Marbella',
     location: {lat: 36.516836991755485, lng: -4.892083234624355},
-    description: 'Puerto Deportivo de Marbella is a picturesque marina located in the heart of Marbella, Spain. This bustling port offers a unique blend of luxury yachts, vibrant beach clubs, and a vibrant nightlife scene. Visitors can enjoy water sports, fine dining, and a lively atmosphere, making it an ideal destination for a day of relaxation and entertainment. The coastline is lined with charming beach bars and restaurants, where visitors can savor delicious local cuisine and refreshing drinks. With a family-friendly vibe, Puerto Deportivo de Marbella is ideal for a day of fun with loved ones, featuring amenities such as sun loungers, umbrellas, and clean showers. Whether you are looking to relax under the sun or dive into exciting water sports, this beach is a must-visit destination in Marbella.',
+    description:
+      'Puerto Deportivo de Marbella is a picturesque marina located in the heart of Marbella, Spain. This bustling port offers a unique blend of luxury yachts, vibrant beach clubs, and a vibrant nightlife scene. Visitors can enjoy water sports, fine dining, and a lively atmosphere, making it an ideal destination for a day of relaxation and entertainment. The coastline is lined with charming beach bars and restaurants, where visitors can savor delicious local cuisine and refreshing drinks. With a family-friendly vibe, Puerto Deportivo de Marbella is ideal for a day of fun with loved ones, featuring amenities such as sun loungers, umbrellas, and clean showers. Whether you are looking to relax under the sun or dive into exciting water sports, this beach is a must-visit destination in Marbella.',
     facilities: [
       {
+        image:
+          'https://www.puenteromanomarbella.com/uploads/images_activity/image/274/333.jpg',
         id: 5,
         name: 'Dolphin Swimming',
         description:
@@ -66,6 +80,8 @@ export const BEACHES = [
         link: 'https://www.puenteromanomarbella.com/activity/37-the-best-marine-park-and-dolphinarium-in-costa-del-sol',
       },
       {
+        image:
+          'https://www.sunsetbeachclub.com/blog/wp-content/uploads/2012/08/International-Sand-Sculpture-Festival-Marbella.jpg',
         id: 6,
         name: 'Sand Sculptures',
         description:
@@ -75,15 +91,19 @@ export const BEACHES = [
     ],
   },
   {
-    image: 'https://a.travel-assets.com/findyours-php/viewfinder/images/res70/346000/346223-Venus-Beach-Marbella.jpg',
+    image:
+      'https://a.travel-assets.com/findyours-php/viewfinder/images/res70/346000/346223-Venus-Beach-Marbella.jpg',
     name: 'Playa de Venus',
     id: 4,
     addresss: 'Marbella, Spain',
     location: {lat: 36.50602888553876, lng: -4.887788772987222},
-    description: 'Playa de Venus is a stunning beach located in the heart of Marbella, Spain. Known for its soft golden sands and crystal-clear waters, this beach offers a perfect escape for sunbathers and water sports enthusiasts alike. The beach is lined with charming beach bars and restaurants, where visitors can savor delicious local cuisine and refreshing drinks. With its family-friendly atmosphere, Playa de Venus is ideal for a day out with loved ones, featuring facilities such as sun loungers, umbrellas, and showers. Whether you are looking to relax under the sun or enjoy a variety of activities, this beach is a must-visit destination in Marbella.',
- 
+    description:
+      'Playa de Venus is a stunning beach located in the heart of Marbella, Spain. Known for its soft golden sands and crystal-clear waters, this beach offers a perfect escape for sunbathers and water sports enthusiasts alike. The beach is lined with charming beach bars and restaurants, where visitors can savor delicious local cuisine and refreshing drinks. With its family-friendly atmosphere, Playa de Venus is ideal for a day out with loved ones, featuring facilities such as sun loungers, umbrellas, and showers. Whether you are looking to relax under the sun or enjoy a variety of activities, this beach is a must-visit destination in Marbella.',
+
     facilities: [
       {
+        image:
+          'https://checkyeti.imgix.net/images/prod/products/25243/Marbella-Renting-Boat-3-5',
         id: 1,
         name: 'Jet Ski Rental',
         description:
@@ -91,6 +111,8 @@ export const BEACHES = [
         link: 'https://www.getyourguide.com/-l1217/-tc67/?cmp=ga&cq_src=google_ads&cq_cmp=6754084680&cq_con=157895885928&cq_term=jet+ski+marbella&cq_med=&cq_plac=&cq_net=g&cq_pos=&cq_plt=gp&campaign_id=6754084680&adgroup_id=157895885928&target_id=kwd-336383641385&loc_physical_ms=9198817&match_type=e&ad_id=669301634040&keyword=jet+ski+marbella&ad_position=&feed_item_id=&placement=&device=c&partner_id=CD951&gad_source=1&gclid=Cj0KCQiAs5i8BhDmARIsAGE4xHwfZ0LH1WinskvIjsNLnsvT4RmTH8AH6a_iqThJkjywWM76nnbemV8aAndLEALw_wcB&visitor-id=JC8ZP46J07I27RXIWJO392CDEHFESZCY&locale_autoredirect_optout=true',
       },
       {
+        image:
+          'https://cdn1.yumping.com/emp/fotos/28/E/000012699/640/kayak3.jpg',
         id: 3,
         name: 'Kayaking',
         description:
@@ -100,14 +122,18 @@ export const BEACHES = [
     ],
   },
   {
-    image: 'https://cf.bstatic.com/xdata/images/hotel/max1024x768/74872442.jpg?k=5a2a28bd19b1d0f6ec05553fb3a1bdd2ba00d0ac5461c344705141481ee2a819&o=&hp=1',
+    image:
+      'https://cf.bstatic.com/xdata/images/hotel/max1024x768/74872442.jpg?k=5a2a28bd19b1d0f6ec05553fb3a1bdd2ba00d0ac5461c344705141481ee2a819&o=&hp=1',
     name: 'Playa Casablanca',
     id: 5,
     addresss: 'Marbella, Spain',
     location: {lat: 36.5044498986507, lng: -4.915873536553181},
-    description: 'Playa Casablanca is a stunning beach located in the lively city of Marbella, Spain. Famous for its soft, golden sands and sparkling azure waters, this beach is an ideal getaway for both sunbathers and thrill-seekers alike.The coastline is lined with charming beach bars and restaurants, where visitors can savor delicious local cuisine and refreshing drinks. With a family-friendly vibe, Playa Casablanca is perfect for a day of fun with loved ones, featuring amenities such as cozy sun loungers, shaded cabanas, and clean showers. Whether you prefer to relax under the sun or dive into exciting water sports, this beach is a must-visit destination in Marbella.',
+    description:
+      'Playa Casablanca is a stunning beach located in the lively city of Marbella, Spain. Famous for its soft, golden sands and sparkling azure waters, this beach is an ideal getaway for both sunbathers and thrill-seekers alike.The coastline is lined with charming beach bars and restaurants, where visitors can savor delicious local cuisine and refreshing drinks. With a family-friendly vibe, Playa Casablanca is perfect for a day of fun with loved ones, featuring amenities such as cozy sun loungers, shaded cabanas, and clean showers. Whether you prefer to relax under the sun or dive into exciting water sports, this beach is a must-visit destination in Marbella.',
     facilities: [
       {
+        image:
+          'https://costadeluxe.es/wp-content/uploads/tour-kayak-marbella.jpg',
         id: 3,
         name: 'Kayaking',
         description:
@@ -115,6 +141,8 @@ export const BEACHES = [
         link: 'https://www.getyourguide.com/-l1217/?cq_src=google_ads&cq_cmp=6654176541&cq_con=104984562672&cq_term=&cq_med=&cq_plac=&cq_net=g&cq_pos=&cq_plt=gp&campaign_id=6654176541&adgroup_id=104984562672&target_id=dsa-928996684231&loc_physical_ms=9198817&match_type=&ad_id=716248385756&keyword=&ad_position=&feed_item_id=&placement=&device=c&partner_id=CD951&gad_source=1&gclid=Cj0KCQiAs5i8BhDmARIsAGE4xHy8eD0Sd4-wEN7abfGsC-OrQnO1ZQbP2bi_gd6lJlnNxmiuE0ypv3caAogMEALw_wcB&redirector=697746',
       },
       {
+        image:
+          'https://www.vistabellacostarica.com/wp-content/uploads/2022/06/273772376_487508176110592_3038011776860382334_n.jpg',
         id: 4,
         name: 'Surfing',
         description:
@@ -124,14 +152,17 @@ export const BEACHES = [
     ],
   },
   {
-    image: 'https://www.nevadomarbella.com/wp-content/uploads/2022/06/playa-nagueles-puente-romano-marbella-nevado-realty.jpg',
+    image:
+      'https://www.nevadomarbella.com/wp-content/uploads/2022/06/playa-nagueles-puente-romano-marbella-nevado-realty.jpg',
     name: 'Playa de Nagüeles',
     id: 6,
     addresss: '29602 Marbella, Spain',
     location: {lat: 36.50244930380613, lng: -4.9205333200932495},
-    description: 'Playa de Nagüeles is a stunning beach located in the heart of Marbella, Spain. Known for its soft golden sands and crystal-clear waters, this beach offers a perfect escape for sunbathers and water sports enthusiasts alike. The beach is lined with charming beach bars and restaurants, where visitors can savor delicious local cuisine and refreshing drinks. With its family-friendly atmosphere, Playa de Nagüeles is ideal for a day out with loved ones, featuring facilities such as sun loungers, umbrellas, and showers. Whether you are looking to relax under the sun or enjoy a variety of activities, this beach is a must-visit destination in Marbella.',
+    description:
+      'Playa de Nagüeles is a stunning beach located in the heart of Marbella, Spain. Known for its soft golden sands and crystal-clear waters, this beach offers a perfect escape for sunbathers and water sports enthusiasts alike. The beach is lined with charming beach bars and restaurants, where visitors can savor delicious local cuisine and refreshing drinks. With its family-friendly atmosphere, Playa de Nagüeles is ideal for a day out with loved ones, featuring facilities such as sun loungers, umbrellas, and showers. Whether you are looking to relax under the sun or enjoy a variety of activities, this beach is a must-visit destination in Marbella.',
     facilities: [
       {
+        image: 'https://www.marbella.gr/app/uploads/2023/05/marb15-0477.jpg',
         id: 3,
         name: 'Kayaking',
         description:
@@ -139,6 +170,8 @@ export const BEACHES = [
         link: 'https://www.getyourguide.com/-l1217/?cq_src=google_ads&cq_cmp=6654176541&cq_con=104984562672&cq_term=&cq_med=&cq_plac=&cq_net=g&cq_pos=&cq_plt=gp&campaign_id=6654176541&adgroup_id=104984562672&target_id=dsa-928996684231&loc_physical_ms=9198817&match_type=&ad_id=716248385756&keyword=&ad_position=&feed_item_id=&placement=&device=c&partner_id=CD951&gad_source=1&gclid=Cj0KCQiAs5i8BhDmARIsAGE4xHy8eD0Sd4-wEN7abfGsC-OrQnO1ZQbP2bi_gd6lJlnNxmiuE0ypv3caAogMEALw_wcB&redirector=697746',
       },
       {
+        image:
+          'https://marbellasurfinn.com/wp-content/uploads/2019/07/surf1.jpg',
         id: 4,
         name: 'Surfing',
         description:
@@ -146,6 +179,8 @@ export const BEACHES = [
         link: 'https://nalusur.com/en/water-activities/surf-in-marbella/',
       },
       {
+        image:
+          'https://dnwp63qf32y8i.cloudfront.net/9491f3b4655259410214396efa9245582ee0da0f',
         id: 6,
         name: 'Sand Sculptures',
         description:
