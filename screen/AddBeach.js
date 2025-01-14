@@ -10,15 +10,15 @@ import {
   Modal,
   Dimensions,
 } from 'react-native';
-import React, { useState } from 'react';
-import { useStoreProvider } from '../store/context';
-import { launchImageLibrary } from 'react-native-image-picker';
-import MapView, { Marker } from 'react-native-maps';
+import React, {useState} from 'react';
+import {useStoreProvider} from '../store/context';
+import {launchImageLibrary} from 'react-native-image-picker';
+import MapView, {Marker} from 'react-native-maps';
 
-const { width } = Dimensions.get('window');
+const {width} = Dimensions.get('window');
 
-const AddBeach = ({ navigation }) => {
-  const { beaches, updateBeaches } = useStoreProvider();
+const AddBeach = ({navigation}) => {
+  const {beaches, updateBeaches} = useStoreProvider();
   const [showMap, setShowMap] = useState(false);
   const [beachData, setBeachData] = useState({
     name: '',
@@ -29,7 +29,7 @@ const AddBeach = ({ navigation }) => {
     },
     description: '',
     image: '',
-    facilities: [{ name: '', text: '' }],
+    facilities: [{name: '', text: ''}],
   });
 
   const handleImagePick = async () => {
@@ -46,8 +46,8 @@ const AddBeach = ({ navigation }) => {
     }
   };
 
-  const handleMapPress = (event) => {
-    const { coordinate } = event.nativeEvent;
+  const handleMapPress = event => {
+    const {coordinate} = event.nativeEvent;
     setBeachData(prev => ({
       ...prev,
       location: {
@@ -64,7 +64,7 @@ const AddBeach = ({ navigation }) => {
   const handleAddFacility = () => {
     setBeachData(prev => ({
       ...prev,
-      facilities: [...prev.facilities, { name: '', text: '' }],
+      facilities: [...prev.facilities, {name: '', text: ''}],
     }));
   };
 
@@ -74,7 +74,7 @@ const AddBeach = ({ navigation }) => {
       ...updatedFacilities[index],
       [field]: value,
     };
-    setBeachData(prev => ({ ...prev, facilities: updatedFacilities }));
+    setBeachData(prev => ({...prev, facilities: updatedFacilities}));
   };
 
   const handleSave = async () => {
@@ -84,20 +84,19 @@ const AddBeach = ({ navigation }) => {
       addresss: beachData.address, // Note the three 's' to match your data structure
     };
 
-    await updateBeaches([...beaches, newBeach]);
+    await updateBeaches([newBeach, ...beaches]);
     navigation.goBack();
   };
 
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
-        <TouchableOpacity 
+        <TouchableOpacity
           onPress={() => navigation.goBack()}
-          style={styles.backButton}
-        >
-          <Image 
-            source={require('../assets/icons/return.png')} 
-            style={styles.backIcon} 
+          style={styles.backButton}>
+          <Image
+            source={require('../assets/icons/return.png')}
+            style={styles.backIcon}
           />
         </TouchableOpacity>
         <Text style={styles.headerTitle}>Add a beach</Text>
@@ -110,7 +109,7 @@ const AddBeach = ({ navigation }) => {
           placeholder="Beach name"
           placeholderTextColor="#666"
           value={beachData.name}
-          onChangeText={(text) => setBeachData(prev => ({ ...prev, name: text }))}
+          onChangeText={text => setBeachData(prev => ({...prev, name: text}))}
         />
 
         <Text style={styles.label}>Address</Text>
@@ -119,24 +118,27 @@ const AddBeach = ({ navigation }) => {
           placeholder="Beach address"
           placeholderTextColor="#666"
           value={beachData.address}
-          onChangeText={(text) => setBeachData(prev => ({ ...prev, address: text }))}
+          onChangeText={text =>
+            setBeachData(prev => ({...prev, address: text}))
+          }
         />
 
         <Text style={styles.label}>Location</Text>
-        <TouchableOpacity 
+        <TouchableOpacity
           style={styles.locationPicker}
-          onPress={() => setShowMap(true)}
-        >
+          onPress={() => setShowMap(true)}>
           <View style={styles.locationContent}>
             {/* <Image 
               source={require('../assets/icons/location.png')} 
               style={styles.locationIcon} 
-            /> */}<Text>+</Text>
+            /> */}
+            <Text>+</Text>
             <Text style={styles.locationText}>
-              {beachData.location.lat !== 0 
-                ? `${beachData.location.lat.toFixed(6)}, ${beachData.location.lng.toFixed(6)}`
-                : 'Select location on map'
-              }
+              {beachData.location.lat !== 0
+                ? `${beachData.location.lat.toFixed(
+                    6,
+                  )}, ${beachData.location.lng.toFixed(6)}`
+                : 'Select location on map'}
             </Text>
           </View>
           {/* <Image 
@@ -153,18 +155,17 @@ const AddBeach = ({ navigation }) => {
           multiline
           numberOfLines={4}
           value={beachData.description}
-          onChangeText={(text) => setBeachData(prev => ({ ...prev, description: text }))}
+          onChangeText={text =>
+            setBeachData(prev => ({...prev, description: text}))
+          }
         />
 
         <Text style={styles.label}>Cover</Text>
-        <TouchableOpacity 
-          style={styles.imageUpload} 
-          onPress={handleImagePick}
-        >
+        <TouchableOpacity style={styles.imageUpload} onPress={handleImagePick}>
           {beachData.image ? (
-            <Image 
-              source={{ uri: beachData.image }} 
-              style={styles.selectedImage} 
+            <Image
+              source={{uri: beachData.image}}
+              style={styles.selectedImage}
             />
           ) : (
             <Text style={styles.uploadText}>+ Upload Image</Text>
@@ -179,7 +180,7 @@ const AddBeach = ({ navigation }) => {
               placeholder="Facility name"
               placeholderTextColor="#666"
               value={facility.name}
-              onChangeText={(text) => updateFacility(index, 'name', text)}
+              onChangeText={text => updateFacility(index, 'name', text)}
             />
             <TextInput
               style={[styles.input, styles.textArea]}
@@ -188,12 +189,14 @@ const AddBeach = ({ navigation }) => {
               multiline
               numberOfLines={4}
               value={facility.text}
-              onChangeText={(text) => updateFacility(index, 'text', text)}
+              onChangeText={text => updateFacility(index, 'text', text)}
             />
           </View>
         ))}
 
-        <TouchableOpacity onPress={handleAddFacility} style={styles.addFacilityButton}>
+        <TouchableOpacity
+          onPress={handleAddFacility}
+          style={styles.addFacilityButton}>
           <Text style={styles.addFacilityText}>+ Add facility</Text>
         </TouchableOpacity>
 
@@ -202,27 +205,21 @@ const AddBeach = ({ navigation }) => {
         </TouchableOpacity>
       </ScrollView>
 
-      <Modal
-        visible={showMap}
-        animationType="slide"
-        statusBarTranslucent
-      >
+      <Modal visible={showMap} animationType="slide" statusBarTranslucent>
         <SafeAreaView style={styles.modalContainer}>
           <View style={styles.modalHeader}>
-            <TouchableOpacity 
+            <TouchableOpacity
               onPress={() => setShowMap(false)}
-              style={styles.modalBackButton}
-            >
-              <Image 
-                source={require('../assets/icons/return.png')} 
-                style={styles.backIcon} 
+              style={styles.modalBackButton}>
+              <Image
+                source={require('../assets/icons/return.png')}
+                style={styles.backIcon}
               />
             </TouchableOpacity>
             <Text style={styles.modalTitle}>Select Location</Text>
-            <TouchableOpacity 
+            <TouchableOpacity
               onPress={handleConfirmLocation}
-              style={styles.confirmButton}
-            >
+              style={styles.confirmButton}>
               <Text style={styles.confirmText}>Confirm</Text>
             </TouchableOpacity>
           </View>
@@ -235,8 +232,7 @@ const AddBeach = ({ navigation }) => {
               latitudeDelta: 0.0922,
               longitudeDelta: 0.0421,
             }}
-            onPress={handleMapPress}
-          >
+            onPress={handleMapPress}>
             <Marker
               coordinate={{
                 latitude: beachData.location.lat,

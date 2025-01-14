@@ -10,13 +10,13 @@ import {
   Dimensions,
   Linking,
 } from 'react-native';
-import React, { useState } from 'react';
-import MapView, { Marker } from 'react-native-maps';
+import React, {useState} from 'react';
+import MapView, {Marker} from 'react-native-maps';
 
-const { width } = Dimensions.get('window');
+const {width} = Dimensions.get('window');
 
-const BeachDetails = ({ route, navigation }) => {
-  const { beach } = route.params;
+const BeachDetails = ({route, navigation}) => {
+  const {beach} = route.params;
   const [showMap, setShowMap] = useState(false);
 
   const handleOpenMaps = () => {
@@ -28,20 +28,19 @@ const BeachDetails = ({ route, navigation }) => {
     <SafeAreaView style={styles.container}>
       <ScrollView>
         <View style={styles.imageContainer}>
-          <Image source={{ uri: beach.image }} style={styles.image} />
-          <TouchableOpacity 
+          <Image source={{uri: beach.image}} style={styles.image} />
+          <TouchableOpacity
             style={styles.backButton}
-            onPress={() => navigation.goBack()}
-          >
-            <Image 
-              source={require('../assets/icons/return.png')} 
-              style={styles.backIcon} 
+            onPress={() => navigation.goBack()}>
+            <Image
+              source={require('../assets/icons/return.png')}
+              style={styles.backIcon}
             />
           </TouchableOpacity>
           <TouchableOpacity style={styles.favoriteButton}>
-            <Image 
-              source={require('../assets/icons/heart.png')} 
-              style={styles.favoriteIcon} 
+            <Image
+              source={require('../assets/icons/heart.png')}
+              style={styles.favoriteIcon}
             />
           </TouchableOpacity>
         </View>
@@ -49,14 +48,13 @@ const BeachDetails = ({ route, navigation }) => {
         <View style={styles.content}>
           <Text style={styles.title}>{beach.name}</Text>
 
-          <TouchableOpacity 
+          <TouchableOpacity
             style={styles.locationContainer}
-            onPress={handleOpenMaps}
-          >
-            {/* <Image 
-              source={require('../assets/icons/location.png')} 
-              style={styles.locationIcon} 
-            /> */}
+            onPress={handleOpenMaps}>
+            <Image
+              source={require('../assets/icons/location.png')}
+              style={styles.locationIcon}
+            />
             <Text style={styles.locationText}>{beach.addresss}</Text>
             {/* <Image 
               source={require('../assets/icons/arrow.png')} 
@@ -74,8 +72,7 @@ const BeachDetails = ({ route, navigation }) => {
                 longitudeDelta: 0.01,
               }}
               scrollEnabled={false}
-              zoomEnabled={false}
-            >
+              zoomEnabled={false}>
               <Marker
                 coordinate={{
                   latitude: beach.location.lat,
@@ -83,10 +80,9 @@ const BeachDetails = ({ route, navigation }) => {
                 }}
               />
             </MapView>
-            <TouchableOpacity 
+            <TouchableOpacity
               style={styles.expandMapButton}
-              onPress={() => setShowMap(true)}
-            >
+              onPress={() => setShowMap(true)}>
               <Text style={styles.expandMapText}>View Full Map</Text>
             </TouchableOpacity>
           </View>
@@ -107,38 +103,34 @@ const BeachDetails = ({ route, navigation }) => {
               <View key={index} style={styles.facilityItem}>
                 <View>
                   <Text style={styles.facilityName}>{facility.name}</Text>
-                  <Text style={styles.facilityDescription}>{facility.text}</Text>
+                  <Text style={styles.facilityDescription}>
+                    {facility.text}
+                  </Text>
                 </View>
-                <TouchableOpacity style={styles.signUpButton}>
+                {/* <TouchableOpacity style={styles.signUpButton}>
                   <Text style={styles.signUpText}>Sign up</Text>
-                </TouchableOpacity>
+                </TouchableOpacity> */}
               </View>
             ))}
           </View>
         </View>
       </ScrollView>
 
-      <Modal
-        visible={showMap}
-        animationType="slide"
-        statusBarTranslucent
-      >
+      <Modal visible={showMap} animationType="slide" statusBarTranslucent>
         <SafeAreaView style={styles.modalContainer}>
           <View style={styles.modalHeader}>
-            <TouchableOpacity 
+            <TouchableOpacity
               onPress={() => setShowMap(false)}
-              style={styles.modalBackButton}
-            >
-              <Image 
-                source={require('../assets/icons/return.png')} 
-                style={styles.backIcon} 
+              style={styles.modalBackButton}>
+              <Image
+                source={require('../assets/icons/return.png')}
+                style={styles.backIcon}
               />
             </TouchableOpacity>
             <Text style={styles.modalTitle}>{beach.name}</Text>
-            <TouchableOpacity 
+            <TouchableOpacity
               onPress={handleOpenMaps}
-              style={styles.openMapsButton}
-            >
+              style={styles.openMapsButton}>
               <Text style={styles.openMapsText}>Open in Maps</Text>
             </TouchableOpacity>
           </View>
@@ -150,8 +142,7 @@ const BeachDetails = ({ route, navigation }) => {
               longitude: beach.location.lng,
               latitudeDelta: 0.02,
               longitudeDelta: 0.02,
-            }}
-          >
+            }}>
             <Marker
               coordinate={{
                 latitude: beach.location.lat,
@@ -205,9 +196,9 @@ const styles = StyleSheet.create({
     borderRadius: 20,
   },
   favoriteIcon: {
-    width: 24,
-    height: 24,
-    tintColor: '#FFD700',
+    width: 32,
+    height: 28,
+    // tintColor: '#FFD700',
   },
   content: {
     padding: 16,
@@ -280,11 +271,13 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
     marginBottom: 4,
+    paddingVertical:6
   },
   facilityDescription: {
     color: 'gray',
     fontSize: 14,
-    maxWidth: '80%',
+    // maxWidth: '80%',
+    
   },
   signUpButton: {
     backgroundColor: '#333',
