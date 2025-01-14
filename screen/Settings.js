@@ -11,6 +11,8 @@ import {
 } from 'react-native';
 import React, {useState} from 'react';
 import {useStoreProvider} from '../store/context';
+import MainLayout from '../components/Layout/MainLayout';
+import Main from './Main';
 
 const Settings = () => {
   const {isDarkMode, toggleTheme, theme} = useStoreProvider();
@@ -63,74 +65,78 @@ const Settings = () => {
   };
 
   return (
-    <SafeAreaView
-      style={[styles.container, {backgroundColor: theme.background}]}>
-      <Text style={[styles.title, {color: theme.text}]}>Settings</Text>
+    <MainLayout>
+      {/* <SafeAreaView
+        style={[styles.container, {backgroundColor: theme.background}]}> */}
+        <Text style={[styles.title, {color: theme.text}]}>Settings</Text>
 
-      <View style={styles.settingsContainer}>
-        <TouchableOpacity style={styles.settingItem} onPress={handleSupport}>
-          <View style={styles.settingLeft}>
-            <Text style={styles.settingText}>Support</Text>
-          </View>
-          <View
-            style={[styles.iconContainer, {backgroundColor: '#4CAF50' + 90}]}>
-            {/* <Text style={styles.icon}>👤</Text>
-             */}
-            <Image
-              source={require('../assets/icons/support.png')}
-              style={styles.icon}
-            />
-          </View>
-        </TouchableOpacity>
+        <View style={styles.settingsContainer}>
+          <TouchableOpacity style={styles.settingItem} onPress={handleSupport}>
+            <View style={styles.settingLeft}>
+              <Text style={styles.settingText}>Support</Text>
+            </View>
+            <View
+              style={[styles.iconContainer, {backgroundColor: '#4CAF50' + 90}]}>
+              {/* <Text style={styles.icon}>👤</Text>
+               */}
+              <Image
+                source={require('../assets/icons/support.png')}
+                style={styles.icon}
+              />
+            </View>
+          </TouchableOpacity>
 
-        <TouchableOpacity style={styles.settingItem} onPress={handleRateUs}>
-          <View style={styles.settingLeft}>
-            <Text style={styles.settingText}>Rate Us</Text>
-          </View>
-          <View
-            style={[styles.iconContainer, {backgroundColor: '#4CAF50' + 90}]}>
-            {/* <Text style={styles.icon}>✨</Text> */}
-            <Image
-              source={require('../assets/icons/rate.png')}
-              style={styles.icon}
-            />
-          </View>
-        </TouchableOpacity>
+          <TouchableOpacity style={styles.settingItem} onPress={handleRateUs}>
+            <View style={styles.settingLeft}>
+              <Text style={styles.settingText}>Rate Us</Text>
+            </View>
+            <View
+              style={[styles.iconContainer, {backgroundColor: '#4CAF50' + 90}]}>
+              {/* <Text style={styles.icon}>✨</Text> */}
+              <Image
+                source={require('../assets/icons/rate.png')}
+                style={styles.icon}
+              />
+            </View>
+          </TouchableOpacity>
 
-        <TouchableOpacity
-          style={styles.settingItem}
-          onPress={handlePrivacyPolicy}>
-          <View style={styles.settingLeft}>
-            <Text style={styles.settingText}>Privacy Policy</Text>
-          </View>
-          <View
-            style={[styles.iconContainer, {backgroundColor: '#4CAF50' + 90}]}>
-            {/* <Text style={styles.icon}>🛡️</Text> */}
-            <Image
-              source={require('../assets/icons/privacy.png')}
-              style={styles.icon}
-            />
-          </View>
-        </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.settingItem}
+            onPress={handlePrivacyPolicy}>
+            <View style={styles.settingLeft}>
+              <Text style={styles.settingText}>Privacy Policy</Text>
+            </View>
+            <View
+              style={[styles.iconContainer, {backgroundColor: '#4CAF50' + 90}]}>
+              {/* <Text style={styles.icon}>🛡️</Text> */}
+              <Image
+                source={require('../assets/icons/privacy.png')}
+                style={styles.icon}
+              />
+            </View>
+          </TouchableOpacity>
 
-        <View style={[styles.settingItem, {backgroundColor: theme.surface}]}>
-          <View style={styles.settingLeft}>
-            <Text style={[styles.settingText, {color: theme.text}]}>Theme</Text>
-          </View>
-          <View style={styles.themeContainer}>
-            <Text style={styles.icon}>🌙</Text>
-            <Switch
-              value={isDarkMode}
-              onValueChange={toggleTheme}
-              trackColor={{false: '#767577', true: theme.accent}}
-              thumbColor={isDarkMode ? '#f5dd4b' : '#f4f3f4'}
-              ios_backgroundColor="#3e3e3e"
-              style={styles.switch}
-            />
+          <View style={[styles.settingItem, {backgroundColor: theme.surface}]}>
+            <View style={styles.settingLeft}>
+              <Text style={[styles.settingText, {color: theme.text}]}>
+                Theme
+              </Text>
+            </View>
+            <View style={styles.themeContainer}>
+              <Text style={styles.icon}>🌙</Text>
+              <Switch
+                value={isDarkMode}
+                onValueChange={toggleTheme}
+                trackColor={{false: '#767572', true: theme.accent}}
+                thumbColor={isDarkMode ? '#f5dd4b' : '#f4f3f4'}
+                ios_backgroundColor="#3e3e3a"
+                style={styles.switch}
+              />
+            </View>
           </View>
         </View>
-      </View>
-    </SafeAreaView>
+      {/* </SafeAreaView> */}
+    </MainLayout>
   );
 };
 
