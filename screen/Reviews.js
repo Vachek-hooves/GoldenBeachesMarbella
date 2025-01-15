@@ -18,8 +18,12 @@ const Reviews = ({navigation}) => {
   // Get favorite beaches
   const favoriteBeaches = beaches.filter(beach => favorites.includes(beach.id));
 
-  const handleReviewPress = (beach) => {
-    navigation.navigate('ReviewCardScreen', {beach});
+  // const handleReviewPress = (beach) => {
+  //   navigation.navigate('ReviewCardScreen', {beach});
+  // };
+
+  const createReview = (beach) => {
+    navigation.navigate('CreateReview', {beach});
   };
 
   const renderEmptyState = () => (
@@ -79,7 +83,7 @@ const Reviews = ({navigation}) => {
               <ReviewCard 
                 key={beach.id} 
                 beach={beach}
-                onPress={() => handleReviewPress(beach)}
+                onPress={() => createReview(beach)}
               />
             ))
         }

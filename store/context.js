@@ -29,6 +29,7 @@ export const StoreProvider = ({children}) => {
   const [isDarkMode, setIsDarkMode] = useState(true);
   // Initialize theme with dark theme by default
   const [theme, setTheme] = useState(themes.dark);
+  const [reviews, setReviews] = useState({});  // Object with beach.id as key
 
   useEffect(() => {
     const initializeData = async () => {
@@ -57,6 +58,11 @@ export const StoreProvider = ({children}) => {
           const isStoredDarkMode = JSON.parse(storedTheme);
           setIsDarkMode(isStoredDarkMode);
           setTheme(isStoredDarkMode ? themes.dark : themes.light);
+        }
+
+        const storedReviews = await AsyncStorage.getItem('reviews');
+        if (storedReviews) {
+          setReviews(JSON.parse(storedReviews));
         }
       } catch (error) {
         console.error('Error initializing data:', error);
@@ -123,6 +129,34 @@ export const StoreProvider = ({children}) => {
     }
   };
 
+  const saveReview = async (beachId, reviewData) => {
+    try {
+      const updatedReviews = {
+        ...reviews,
+        [beachId]: reviewData
+      };
+      await AsyncStorage.setItem('reviews', JSON.stringify(updatedReviews));
+      setReviews(updatedReviews);
+      return true;
+    } catch (error) {
+      console.error('Error saving review:', error);
+      return false;
+    }
+  };
+
+  const deleteReview = async (beachId) => {
+    try {
+      const updatedReviews = {...reviews};
+      delete updatedReviews[beachId];
+      await AsyncStorage.setItem('reviews', JSON.stringify(updatedReviews));
+      setReviews(updatedReviews);
+      return true;
+    } catch (error) {
+      console.error('Error deleting review:', error);
+      return false;
+    }
+  };
+
   const value = {
     beaches,
     updateBeaches,
@@ -132,6 +166,9 @@ export const StoreProvider = ({children}) => {
     isDarkMode,
     toggleTheme,
     deleteBeach,
+    reviews,
+    saveReview,
+    deleteReview,
   };
 
   return (

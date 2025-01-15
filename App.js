@@ -9,6 +9,7 @@ import {
   ReviewCardScreen,
 } from './screen';
 import TabNavigation from './TabNavigation';
+import CreateReview from './screen/CreateReview';
 
 const Stack = createNativeStackNavigator();
 
@@ -31,6 +32,7 @@ function App() {
             component={FacilitiesDetails}
           />
           <Stack.Screen name="ReviewCardScreen" component={ReviewCardScreen} />
+          <Stack.Screen name="CreateReview" component={CreateReview} />
         </Stack.Navigator>
       </NavigationContainer>
     </StoreProvider>
