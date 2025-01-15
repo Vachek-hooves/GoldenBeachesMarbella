@@ -18,26 +18,32 @@ const Reviews = ({navigation}) => {
   // Get favorite beaches
   const favoriteBeaches = beaches.filter(beach => favorites.includes(beach.id));
 
-  const handleReviewPress = (beach) => {
+  const handleReviewPress = beach => {
     navigation.navigate('CreateReview', {beach});
   };
 
   const renderEmptyState = () => (
-    <View style={styles.emptyStateContainer}>
+    <TouchableOpacity 
+      style={styles.emptyStateContainer}
+      onPress={() => navigation.navigate('Beaches')}
+    >
       <Image
         source={require('../assets/icons/bigUmbrella.png')}
         style={styles.emptyStateImage}
       />
       <Text style={styles.emptyStateText}>
-        There aren't any favorite beaches yet,{'\n'}you can add them from Beaches tab
+        To review a beach, you need to add it to your favorites first on the Beaches tab
       </Text>
-    </View>
+      <View style={styles.addButton}>
+        <Text style={styles.addButtonText}>+</Text>
+      </View>
+    </TouchableOpacity>
   );
 
   return (
     <MainLayout>
       <Text style={styles.title}>Marbella Reviews</Text>
-      
+
       {/* <View style={styles.segmentContainer}>
         <TouchableOpacity
           style={[
@@ -69,21 +75,19 @@ const Reviews = ({navigation}) => {
         </TouchableOpacity>
       </View> */}
 
-      <ScrollView 
+      <ScrollView
         style={styles.reviewsContainer}
-        showsVerticalScrollIndicator={false}
-      >
-        {favoriteBeaches.length === 0 
+        showsVerticalScrollIndicator={false}>
+        {favoriteBeaches.length === 0
           ? renderEmptyState()
           : favoriteBeaches.map(beach => (
-              <ReviewCard 
-                key={beach.id} 
+              <ReviewCard
+                key={beach.id}
                 beach={beach}
                 review={reviews[beach.id]}
                 onPress={() => handleReviewPress(beach)}
               />
-            ))
-        }
+            ))}
       </ScrollView>
     </MainLayout>
   );
@@ -128,6 +132,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginBottom: 100,
+    padding: 20,
   },
   emptyStateImage: {
     width: 80,
@@ -141,6 +146,20 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     lineHeight: 24,
     marginBottom: 24,
+  },
+  addButton: {
+    width: 56,
+    height: 56,
+    borderRadius: 28,
+    backgroundColor: '#FFD700',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 16,
+  },
+  addButtonText: {
+    fontSize: 32,
+    color: '#000000',
+    fontWeight: 'bold',
   },
   reviewsContainer: {
     flex: 1,
