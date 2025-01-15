@@ -1,33 +1,29 @@
 import {StyleSheet, Text, View, TouchableOpacity, Image} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
-import { useStoreProvider } from '../../store/context';
+import {useStoreProvider} from '../../store/context';
 
-const BeachCard = ({beach}) => {
+const BeachCard = ({beach, width}) => {
   const navigation = useNavigation();
-  const { favorites, toggleFavorite } = useStoreProvider();
+  const {favorites, toggleFavorite} = useStoreProvider();
 
   const isFavorite = favorites.includes(beach.id);
 
-  const handleFavoritePress = (e) => {
+  const handleFavoritePress = e => {
     e.stopPropagation(); // Prevent triggering the card's onPress
     toggleFavorite(beach.id);
   };
 
   return (
     <TouchableOpacity
-      style={styles.card}
+      style={[styles.card, {width: width ? `$ {width}%` : '48%'}]}
       onPress={() => navigation.navigate('BeachDetails', {beach})}>
       <Image source={{uri: beach.image}} style={styles.beachImage} />
-      <TouchableOpacity 
+      <TouchableOpacity
         style={styles.favoriteButton}
-        onPress={handleFavoritePress}
-      >
+        onPress={handleFavoritePress}>
         <Image
           source={require('../../assets/icons/heart.png')}
-          style={[
-            styles.favoriteIcon,
-            isFavorite && styles.favoriteIconActive
-          ]}
+          style={[styles.favoriteIcon, isFavorite && styles.favoriteIconActive]}
         />
       </TouchableOpacity>
       <View style={styles.cardContent}>

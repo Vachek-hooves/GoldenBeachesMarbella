@@ -5,70 +5,82 @@ import {
   SafeAreaView,
   TouchableOpacity,
   Image,
+  ScrollView,
 } from 'react-native';
 import React, {useState} from 'react';
 import {useStoreProvider} from '../store/context';
 import MainLayout from '../components/Layout/MainLayout';
+import BeachCard from '../components/actions/BeachCard';
 
 const Reviews = () => {
-  const {theme} = useStoreProvider();
+  const {theme, favorites, beaches} = useStoreProvider();
   const [activeTab, setActiveTab] = useState('Main');
 
-  const renderSegmentControl = () => (
-    <View style={styles.segmentContainer}>
-      <TouchableOpacity
-        style={[
-          styles.segmentButton,
-          activeTab === 'Main' && styles.segmentButtonActive,
-        ]}
-        onPress={() => setActiveTab('Main')}>
-        <Text
-          style={[
-            styles.segmentText,
-            activeTab === 'Main' && styles.segmentTextActive,
-          ]}>
-          Main
-        </Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={[
-          styles.segmentButton,
-          activeTab === 'Deleted' && styles.segmentButtonActive,
-        ]}
-        onPress={() => setActiveTab('Deleted')}>
-        <Text
-          style={[
-            styles.segmentText,
-            activeTab === 'Deleted' && styles.segmentTextActive,
-          ]}>
-          Deleted
-        </Text>
-      </TouchableOpacity>
-    </View>
-  );
+  // Get favorite beaches by filtering all beaches
+  const favoriteBeaches = beaches.filter(beach => favorites.includes(beach.id));
 
   const renderEmptyState = () => (
     <View style={styles.emptyStateContainer}>
       <Image
-        source={require('../assets/icons/bigUmbrells.png')}
+        source={require('../assets/icons/bigUmbrella.png')}
         style={styles.emptyStateImage}
       />
-      <Text style={[styles.emptyStateText, {color: theme.text}]}>
-        There aren't any reviews you add yet,{'\n'}you can do it now
+      <Text style={styles.emptyStateText}>
+        There aren't any favorite beaches yet,{'\n'}you can add them now
       </Text>
-      <TouchableOpacity style={styles.addReviewButton}>
-        <Text style={styles.addReviewText}>Add a review</Text>
-      </TouchableOpacity>
     </View>
+  );
+
+  const renderFavoriteBeaches = () => (
+    <ScrollView 
+      style={styles.beachesContainer}
+      showsVerticalScrollIndicator={false}
+    >
+      {favoriteBeaches.map(beach => (
+        <BeachCard key={beach.id} beach={beach} width={'100%'} />
+      ))}
+    </ScrollView>
   );
 
   return (
     <MainLayout>
-      {/* <SafeAreaView style={styles.container}> */}
-      <Text style={[styles.title, {color: theme.text}]}>Marbella Reviews</Text>
-      {renderSegmentControl()}
-      {renderEmptyState()}
-      {/* </SafeAreaView> */}
+      <Text style={styles.title}>Marbella Reviews</Text>
+      
+      <View style={styles.segmentContainer}>
+        <TouchableOpacity
+          style={[
+            styles.segmentButton,
+            activeTab === 'Main' && styles.segmentButtonActive,
+          ]}
+          onPress={() => setActiveTab('Main')}>
+          <Text
+            style={[
+              styles.segmentText,
+              activeTab === 'Main' && styles.segmentTextActive,
+            ]}>
+            Main
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={[
+            styles.segmentButton,
+            activeTab === 'Deleted' && styles.segmentButtonActive,
+          ]}
+          onPress={() => setActiveTab('Deleted')}>
+          <Text
+            style={[
+              styles.segmentText,
+              activeTab === 'Deleted' && styles.segmentTextActive,
+            ]}>
+            Deleted
+          </Text>
+        </TouchableOpacity>
+      </View>
+
+      {favoriteBeaches.length === 0 
+        ? renderEmptyState() 
+        : renderFavoriteBeaches()
+      }
     </MainLayout>
   );
 };
@@ -76,32 +88,27 @@ const Reviews = () => {
 export default Reviews;
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: 'black',
-    paddingHorizontal: 16,
-  },
   title: {
-    fontSize: 28,
+    fontSize: 34,
     fontWeight: 'bold',
     color: 'white',
     marginTop: 16,
-    marginBottom: 24,
-    marginHorizontal: 10,
+    marginBottom: 32,
+    marginHorizontal: 16,
   },
   segmentContainer: {
     flexDirection: 'row',
     backgroundColor: '#1a1a1a',
-    borderRadius: 20,
+    borderRadius: 16,
     padding: 4,
+    marginHorizontal: 16,
     marginBottom: 32,
-    marginHorizontal: 10,
   },
   segmentButton: {
     flex: 1,
     paddingVertical: 8,
     alignItems: 'center',
-    borderRadius: 16,
+    borderRadius: 12,
   },
   segmentButtonActive: {
     backgroundColor: 'white',
@@ -133,15 +140,9 @@ const styles = StyleSheet.create({
     lineHeight: 24,
     marginBottom: 24,
   },
-  addReviewButton: {
-    backgroundColor: '#333',
-    paddingVertical: 12,
-    paddingHorizontal: 24,
-    borderRadius: 8,
-  },
-  addReviewText: {
-    color: '#FFD700',
-    fontSize: 16,
-    fontWeight: '600',
+  beachesContainer: {
+    flex: 1,
+    paddingHorizontal: 16,
+    width: '100%',
   },
 });

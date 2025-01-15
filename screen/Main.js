@@ -53,6 +53,9 @@ const Main = () => {
         </TouchableOpacity>
       </View> */}
 
+
+
+
       <ScrollView style={styles.beachList}>
         <View style={styles.beachGrid}>
           {beaches.map((beach, index) => (
