@@ -2,22 +2,25 @@ import {
   StyleSheet,
   Text,
   View,
-  SafeAreaView,
+  ScrollView,
   TouchableOpacity,
   Image,
-  ScrollView,
 } from 'react-native';
 import React, {useState} from 'react';
 import {useStoreProvider} from '../store/context';
 import MainLayout from '../components/Layout/MainLayout';
-import BeachCard from '../components/actions/BeachCard';
+import ReviewCard from '../components/actions/ReviewCard';
 
-const Reviews = () => {
+const Reviews = ({navigation}) => {
   const {theme, favorites, beaches} = useStoreProvider();
   const [activeTab, setActiveTab] = useState('Main');
 
-  // Get favorite beaches by filtering all beaches
+  // Get favorite beaches
   const favoriteBeaches = beaches.filter(beach => favorites.includes(beach.id));
+
+  const handleReviewPress = (beach) => {
+    navigation.navigate('ReviewCardScreen', {beach});
+  };
 
   const renderEmptyState = () => (
     <View style={styles.emptyStateContainer}>
@@ -26,20 +29,9 @@ const Reviews = () => {
         style={styles.emptyStateImage}
       />
       <Text style={styles.emptyStateText}>
-        There aren't any favorite beaches yet,{'\n'}you can add them now
+        There aren't any favorite beaches yet,{'\n'}you can add them from Beaches tab
       </Text>
     </View>
-  );
-
-  const renderFavoriteBeaches = () => (
-    <ScrollView 
-      style={styles.beachesContainer}
-      showsVerticalScrollIndicator={false}
-    >
-      {favoriteBeaches.map(beach => (
-        <BeachCard key={beach.id} beach={beach} width={'100%'} />
-      ))}
-    </ScrollView>
   );
 
   return (
@@ -77,15 +69,24 @@ const Reviews = () => {
         </TouchableOpacity>
       </View>
 
-      {favoriteBeaches.length === 0 
-        ? renderEmptyState() 
-        : renderFavoriteBeaches()
-      }
+      <ScrollView 
+        style={styles.reviewsContainer}
+        showsVerticalScrollIndicator={false}
+      >
+        {favoriteBeaches.length === 0 
+          ? renderEmptyState()
+          : favoriteBeaches.map(beach => (
+              <ReviewCard 
+                key={beach.id} 
+                beach={beach}
+                onPress={() => handleReviewPress(beach)}
+              />
+            ))
+        }
+      </ScrollView>
     </MainLayout>
   );
 };
-
-export default Reviews;
 
 const styles = StyleSheet.create({
   title: {
@@ -140,9 +141,10 @@ const styles = StyleSheet.create({
     lineHeight: 24,
     marginBottom: 24,
   },
-  beachesContainer: {
+  reviewsContainer: {
     flex: 1,
     paddingHorizontal: 16,
-    width: '100%',
   },
 });
+
+export default Reviews;

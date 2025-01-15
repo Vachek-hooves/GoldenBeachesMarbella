@@ -1,9 +1,14 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {NavigationContainer} from '@react-navigation/native';
 import {StoreProvider} from './store/context';
-import {AddBeach, BeachDetails, FacilitiesDetails, IntroScreen} from './screen';
+import {
+  AddBeach,
+  BeachDetails,
+  FacilitiesDetails,
+  IntroScreen,
+  ReviewCardScreen,
+} from './screen';
 import TabNavigation from './TabNavigation';
-
 
 const Stack = createNativeStackNavigator();
 
@@ -25,6 +30,7 @@ function App() {
             name="FacilitiesDetails"
             component={FacilitiesDetails}
           />
+          <Stack.Screen name="ReviewCardScreen" component={ReviewCardScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </StoreProvider>
