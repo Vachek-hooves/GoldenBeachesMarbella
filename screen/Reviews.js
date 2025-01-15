@@ -12,17 +12,13 @@ import MainLayout from '../components/Layout/MainLayout';
 import ReviewCard from '../components/actions/ReviewCard';
 
 const Reviews = ({navigation}) => {
-  const {theme, favorites, beaches} = useStoreProvider();
+  const {theme, favorites, beaches, reviews} = useStoreProvider();
   const [activeTab, setActiveTab] = useState('Main');
 
   // Get favorite beaches
   const favoriteBeaches = beaches.filter(beach => favorites.includes(beach.id));
 
-  // const handleReviewPress = (beach) => {
-  //   navigation.navigate('ReviewCardScreen', {beach});
-  // };
-
-  const createReview = (beach) => {
+  const handleReviewPress = (beach) => {
     navigation.navigate('CreateReview', {beach});
   };
 
@@ -42,7 +38,7 @@ const Reviews = ({navigation}) => {
     <MainLayout>
       <Text style={styles.title}>Marbella Reviews</Text>
       
-      <View style={styles.segmentContainer}>
+      {/* <View style={styles.segmentContainer}>
         <TouchableOpacity
           style={[
             styles.segmentButton,
@@ -71,7 +67,7 @@ const Reviews = ({navigation}) => {
             Deleted
           </Text>
         </TouchableOpacity>
-      </View>
+      </View> */}
 
       <ScrollView 
         style={styles.reviewsContainer}
@@ -83,7 +79,8 @@ const Reviews = ({navigation}) => {
               <ReviewCard 
                 key={beach.id} 
                 beach={beach}
-                onPress={() => createReview(beach)}
+                review={reviews[beach.id]}
+                onPress={() => handleReviewPress(beach)}
               />
             ))
         }

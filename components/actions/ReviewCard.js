@@ -1,7 +1,7 @@
 import React from 'react';
 import {StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
 
-const ReviewCard = ({beach, onPress}) => {
+const ReviewCard = ({beach, review, onPress}) => {
   // Truncate description if too long
   const truncateText = (text, maxLength) => {
     if (text.length <= maxLength) return text;
@@ -12,9 +12,14 @@ const ReviewCard = ({beach, onPress}) => {
     <TouchableOpacity style={styles.container} onPress={onPress}>
       <Image source={{uri: beach.image}} style={styles.image} />
       <View style={styles.contentContainer}>
-        <Text style={styles.heading}>{beach.name}</Text>
+        <Text style={styles.heading}>
+          {review ? review.heading : beach.name}
+        </Text>
         <Text style={styles.description}>
-          {truncateText(beach.description, 100)}
+          {review 
+            ? truncateText(review.comment, 100)
+            : truncateText(beach.description, 100)
+          }
         </Text>
       </View>
       <View style={styles.ratingContainer}>
@@ -23,7 +28,7 @@ const ReviewCard = ({beach, onPress}) => {
             key={index}
             style={[
               styles.star,
-              {color: beach.rating && index < beach.rating ? '#FFD700' : '#666666'},
+              {color: review && index < review.rating ? '#FFD700' : '#666666'},
             ]}>
             ★
           </Text>
