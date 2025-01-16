@@ -13,6 +13,7 @@ import React from 'react';
 import {BEACHES} from '../data/beaches';
 import {useStoreProvider} from '../store/context';
 import MainLayout from '../components/Layout/MainLayout';
+import SafariView from 'react-native-safari-view';
 
 const {width} = Dimensions.get('window');
 
@@ -27,9 +28,17 @@ const Activities = ({navigation}) => {
     ),
   ).map(str => JSON.parse(str));
 
-  const handleSignUp = link => {
+  const handleSignUp = async (link) => {
     if (link) {
-      Linking.openURL(link);
+      try {
+        await SafariView.show({
+          url: link,
+          tintColor: '#FFD700',
+          barTintColor: '#1a1a1a',
+        });
+      } catch (error) {
+        console.error('Error opening SafariView:', error);
+      }
     }
   };
 
