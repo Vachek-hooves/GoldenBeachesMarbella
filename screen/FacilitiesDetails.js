@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import React from 'react';
 import QrCode from '../components/ui/QRcode/QrCode';
+import ImagedLayout from '../components/Layout/ImagedLayout';
 
 const FacilitiesDetails = ({route, navigation}) => {
   const {facility} = route.params;
@@ -21,33 +22,37 @@ const FacilitiesDetails = ({route, navigation}) => {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
-      <ScrollView>
-        <View style={styles.imageContainer}>
-          <Image source={{uri: facility.image}} style={styles.image} />
-          <TouchableOpacity
-            style={styles.backButton}
-            onPress={() => navigation.goBack()}>
-            <Image
-              source={require('../assets/icons/return.png')}
-              style={styles.backIcon}
-            />
-          </TouchableOpacity>
-        </View>
+    <ImagedLayout>
+      <SafeAreaView style={styles.container}>
+        <ScrollView>
+          <View style={styles.imageContainer}>
+            <Image source={{uri: facility.image}} style={styles.image} />
+            <TouchableOpacity
+              style={styles.backButton}
+              onPress={() => navigation.goBack()}>
+              <Image
+                source={require('../assets/icons/return.png')}
+                style={styles.backIcon}
+              />
+            </TouchableOpacity>
+          </View>
 
-        <View style={styles.content}>
-          <Text style={styles.title}>{facility.name}</Text>
-          <Text style={styles.description}>{facility.description}</Text>
+          <View style={styles.content}>
+            <Text style={styles.title}>{facility.name}</Text>
+            <Text style={styles.description}>{facility.description}</Text>
 
-          <QrCode value={facility.link} />
+            <QrCode value={facility.link} />
 
-          <TouchableOpacity style={styles.signUpButton} onPress={handleSignUp}>
-            <Text style={styles.signUpText}>Visit</Text>
-          </TouchableOpacity>
-        </View>
-      <View style={{height: 50}} />
-      </ScrollView>
-    </SafeAreaView>
+            <TouchableOpacity
+              style={styles.signUpButton}
+              onPress={handleSignUp}>
+              <Text style={styles.signUpText}>Visit</Text>
+            </TouchableOpacity>
+          </View>
+          <View style={{height: 50}} />
+        </ScrollView>
+      </SafeAreaView>
+    </ImagedLayout>
   );
 };
 
@@ -56,7 +61,7 @@ export default FacilitiesDetails;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'black',
+    // backgroundColor: 'black',
   },
   imageContainer: {
     position: 'relative',

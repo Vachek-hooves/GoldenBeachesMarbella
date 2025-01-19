@@ -14,6 +14,7 @@ import {BEACHES} from '../data/beaches';
 import {useStoreProvider} from '../store/context';
 import MainLayout from '../components/Layout/MainLayout';
 import SafariView from 'react-native-safari-view';
+import ImagedLayout from '../components/Layout/ImagedLayout';
 
 const {width} = Dimensions.get('window');
 
@@ -28,7 +29,7 @@ const Activities = ({navigation}) => {
     ),
   ).map(str => JSON.parse(str));
 
-  const handleSignUp = async (link) => {
+  const handleSignUp = async link => {
     if (link) {
       try {
         await SafariView.show({
@@ -47,7 +48,8 @@ const Activities = ({navigation}) => {
   };
   // console.log(uniqueFacilities.map(facility => facility));
   return (
-    <MainLayout>
+    <ImagedLayout>
+      {/* <MainLayout> */}
       {/* <SafeAreaView style={styles.container}> */}
       <Text style={[styles.title, {color: theme.text}]}>
         Marbella Activities
@@ -79,7 +81,8 @@ const Activities = ({navigation}) => {
         ))}
       </ScrollView>
       {/* </SafeAreaView> */}
-    </MainLayout>
+      {/* </MainLayout> */}
+    </ImagedLayout>
   );
 };
 

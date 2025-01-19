@@ -11,13 +11,15 @@ import {useStoreProvider} from '../store/context';
 import AddBeach from '../components/ui/IconBtn/AddBeach';
 import BeachCard from '../components/actions/BeachCard';
 import MainLayout from '../components/Layout/MainLayout';
+import ImagedLayout from '../components/Layout/ImagedLayout';
 
 const Main = () => {
   const {beaches, theme} = useStoreProvider();
   const [activeTab, setActiveTab] = useState('General');
 
   return (
-    <MainLayout>
+    <ImagedLayout>
+      {/* <MainLayout> */}
       {/* <SafeAreaView style={styles.container}> */}
       <View style={styles.header}>
         <Text style={[styles.title, {color: theme.text}]}>
@@ -28,34 +30,6 @@ const Main = () => {
         </TouchableOpacity>
       </View>
 
-      {/* <View style={styles.tabs}>
-        <TouchableOpacity
-          style={[styles.tab, activeTab === 'General' && styles.activeTab]}
-          onPress={() => setActiveTab('General')}>
-          <Text
-            style={[
-              styles.tabText,
-              activeTab === 'General' && styles.activeTabText,
-            ]}>
-            General
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={[styles.tab, activeTab === 'Added' && styles.activeTab]}
-          onPress={() => setActiveTab('Added')}>
-          <Text
-            style={[
-              styles.tabText,
-              activeTab === 'Added' && styles.activeTabText,
-            ]}>
-            Added
-          </Text>
-        </TouchableOpacity>
-      </View> */}
-
-
-
-
       <ScrollView style={styles.beachList}>
         <View style={styles.beachGrid}>
           {beaches.map((beach, index) => (
@@ -65,7 +39,8 @@ const Main = () => {
       </ScrollView>
       <AddBeach />
       {/* </SafeAreaView> */}
-    </MainLayout>
+      {/* </MainLayout> */}
+    </ImagedLayout>
   );
 };
 

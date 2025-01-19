@@ -10,6 +10,7 @@ import React, {useState} from 'react';
 import {useStoreProvider} from '../store/context';
 import MainLayout from '../components/Layout/MainLayout';
 import ReviewCard from '../components/actions/ReviewCard';
+import ImagedLayout from '../components/Layout/ImagedLayout';
 
 const Reviews = ({navigation}) => {
   const {theme, favorites, beaches, reviews} = useStoreProvider();
@@ -23,16 +24,16 @@ const Reviews = ({navigation}) => {
   };
 
   const renderEmptyState = () => (
-    <TouchableOpacity 
+    <TouchableOpacity
       style={styles.emptyStateContainer}
-      onPress={() => navigation.navigate('Beaches')}
-    >
+      onPress={() => navigation.navigate('Beaches')}>
       <Image
         source={require('../assets/icons/bigUmbrella.png')}
         style={styles.emptyStateImage}
       />
       <Text style={styles.emptyStateText}>
-        To review a beach, you need to add it to your favorites first on the Beaches tab
+        To review a beach, you need to add it to your favorites first on the
+        Beaches tab
       </Text>
       <View style={styles.addButton}>
         <Text style={styles.addButtonText}>+</Text>
@@ -41,10 +42,11 @@ const Reviews = ({navigation}) => {
   );
 
   return (
-    <MainLayout>
-      <Text style={styles.title}>Marbella Reviews</Text>
+    <ImagedLayout>
+      {/* <MainLayout> */}
+        <Text style={styles.title}>Marbella Reviews</Text>
 
-      {/* <View style={styles.segmentContainer}>
+        {/* <View style={styles.segmentContainer}>
         <TouchableOpacity
           style={[
             styles.segmentButton,
@@ -75,21 +77,22 @@ const Reviews = ({navigation}) => {
         </TouchableOpacity>
       </View> */}
 
-      <ScrollView
-        style={styles.reviewsContainer}
-        showsVerticalScrollIndicator={false}>
-        {favoriteBeaches.length === 0
-          ? renderEmptyState()
-          : favoriteBeaches.map(beach => (
-              <ReviewCard
-                key={beach.id}
-                beach={beach}
-                review={reviews[beach.id]}
-                onPress={() => handleReviewPress(beach)}
-              />
-            ))}
-      </ScrollView>
-    </MainLayout>
+        <ScrollView
+          style={styles.reviewsContainer}
+          showsVerticalScrollIndicator={false}>
+          {favoriteBeaches.length === 0
+            ? renderEmptyState()
+            : favoriteBeaches.map(beach => (
+                <ReviewCard
+                  key={beach.id}
+                  beach={beach}
+                  review={reviews[beach.id]}
+                  onPress={() => handleReviewPress(beach)}
+                />
+              ))}
+        </ScrollView>
+      {/* </MainLayout> */}
+    </ImagedLayout>
   );
 };
 

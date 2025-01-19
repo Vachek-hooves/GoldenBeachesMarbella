@@ -15,6 +15,7 @@ import MainLayout from '../components/Layout/MainLayout';
 import Main from './Main';
 import LightMode from '../components/ui/LightMode';
 import DarkMode from '../components/ui/DarkMode';
+import ImagedLayout from '../components/Layout/ImagedLayout';
 
 const Settings = () => {
   const {isDarkMode, toggleTheme, theme} = useStoreProvider();
@@ -67,7 +68,8 @@ const Settings = () => {
   };
 
   return (
-    <MainLayout>
+    <ImagedLayout>
+      {/* <MainLayout> */}
       {/* <SafeAreaView
         style={[styles.container, {backgroundColor: theme.background}]}> */}
       <Text style={[styles.title, {color: theme.text}]}>Settings</Text>
@@ -138,7 +140,8 @@ const Settings = () => {
         </View>
       </View>
       {/* </SafeAreaView> */}
-    </MainLayout>
+      {/* </MainLayout> */}
+    </ImagedLayout>
   );
 };
 

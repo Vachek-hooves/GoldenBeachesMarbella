@@ -14,6 +14,7 @@ import {
 import React, {useState} from 'react';
 import MapView, {Marker} from 'react-native-maps';
 import {useStoreProvider} from '../store/context';
+import ImagedLayout from '../components/Layout/ImagedLayout';
 
 const {width} = Dimensions.get('window');
 
@@ -78,82 +79,83 @@ const BeachDetails = ({route, navigation}) => {
   // console.log(beach.facilities);
 
   return (
-    <SafeAreaView style={styles.container}>
-      <ScrollView>
-        <View style={styles.imageContainer}>
-          <Image source={{uri: beach.image}} style={styles.image} />
-          <TouchableOpacity
-            style={styles.backButton}
-            onPress={() => navigation.goBack()}>
-            <Image
-              source={require('../assets/icons/return.png')}
-              style={styles.backIcon}
-            />
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.favoriteButton}
-            onPress={handleFavoritePress}>
-            <Image
-              source={require('../assets/icons/heart.png')}
-              style={[
-                styles.favoriteIcon,
-                isFavorite && styles.favoriteIconActive,
-              ]}
-            />
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.deleteButton}
-            onPress={handleDeleteBeach}>
-            <Image
-              source={require('../assets/icons/trash.png')}
-              style={styles.deleteIcon}
-            />
-          </TouchableOpacity>
-        </View>
-
-        <View style={styles.content}>
-          <Text style={styles.title}>{beach.name}</Text>
-
-          <TouchableOpacity
-            style={styles.locationContainer}
-            onPress={handleOpenMaps}>
-            <Image
-              source={require('../assets/icons/location.png')}
-              style={styles.locationIcon}
-            />
-            <Text style={styles.locationText}>{beach.addresss}</Text>
-            {/* <Image 
-              source={require('../assets/icons/arrow.png')} 
-              style={styles.arrowIcon} 
-            /> */}
-          </TouchableOpacity>
-
-          <View style={styles.mapPreviewContainer}>
-            <MapView
-              style={styles.mapPreview}
-              initialRegion={{
-                latitude: beach.location.lat,
-                longitude: beach.location.lng,
-                latitudeDelta: 0.01,
-                longitudeDelta: 0.01,
-              }}
-              scrollEnabled={false}
-              zoomEnabled={false}>
-              <Marker
-                coordinate={{
-                  latitude: beach.location.lat,
-                  longitude: beach.location.lng,
-                }}
-              />
-            </MapView>
+    <ImagedLayout>
+      <SafeAreaView style={styles.container}>
+        <ScrollView>
+          <View style={styles.imageContainer}>
+            <Image source={{uri: beach.image}} style={styles.image} />
             <TouchableOpacity
-              style={styles.expandMapButton}
-              onPress={() => setShowMap(true)}>
-              <Text style={styles.expandMapText}>View Full Map</Text>
+              style={styles.backButton}
+              onPress={() => navigation.goBack()}>
+              <Image
+                source={require('../assets/icons/return.png')}
+                style={styles.backIcon}
+              />
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.favoriteButton}
+              onPress={handleFavoritePress}>
+              <Image
+                source={require('../assets/icons/heart.png')}
+                style={[
+                  styles.favoriteIcon,
+                  isFavorite && styles.favoriteIconActive,
+                ]}
+              />
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.deleteButton}
+              onPress={handleDeleteBeach}>
+              <Image
+                source={require('../assets/icons/trash.png')}
+                style={styles.deleteIcon}
+              />
             </TouchableOpacity>
           </View>
 
-          {/* <View style={styles.temperatureContainer}>
+          <View style={styles.content}>
+            <Text style={styles.title}>{beach.name}</Text>
+
+            <TouchableOpacity
+              style={styles.locationContainer}
+              onPress={handleOpenMaps}>
+              <Image
+                source={require('../assets/icons/location.png')}
+                style={styles.locationIcon}
+              />
+              <Text style={styles.locationText}>{beach.addresss}</Text>
+              {/* <Image 
+              source={require('../assets/icons/arrow.png')} 
+              style={styles.arrowIcon} 
+            /> */}
+            </TouchableOpacity>
+
+            <View style={styles.mapPreviewContainer}>
+              <MapView
+                style={styles.mapPreview}
+                initialRegion={{
+                  latitude: beach.location.lat,
+                  longitude: beach.location.lng,
+                  latitudeDelta: 0.01,
+                  longitudeDelta: 0.01,
+                }}
+                scrollEnabled={false}
+                zoomEnabled={false}>
+                <Marker
+                  coordinate={{
+                    latitude: beach.location.lat,
+                    longitude: beach.location.lng,
+                  }}
+                />
+              </MapView>
+              <TouchableOpacity
+                style={styles.expandMapButton}
+                onPress={() => setShowMap(true)}>
+                <Text style={styles.expandMapText}>View Full Map</Text>
+              </TouchableOpacity>
+            </View>
+
+            {/* <View style={styles.temperatureContainer}>
             <Image 
               source={require('../assets/icons/temperature.png')} 
               style={styles.temperatureIcon} 
@@ -161,72 +163,73 @@ const BeachDetails = ({route, navigation}) => {
             <Text style={styles.temperatureText}>24-25 °C</Text>
           </View> */}
 
-          <Text style={styles.description}>{beach.description}</Text>
+            <Text style={styles.description}>{beach.description}</Text>
 
-          <View style={styles.facilitiesSection}>
-            <Text style={styles.facilitiesTitle}>Facilities on site</Text>
-            {beach.facilities.map(facility => (
-              <TouchableOpacity
-                key={facility.id}
-                style={styles.facilityItem}
-                onPress={() => handleFacilityPress(facility)}>
-                <View style={styles.facilityContent}>
-                  <Text style={styles.facilityName}>{facility.name}</Text>
-                  {/* <Text style={styles.facilityDescription}>
+            <View style={styles.facilitiesSection}>
+              <Text style={styles.facilitiesTitle}>Facilities on site</Text>
+              {beach.facilities.map(facility => (
+                <TouchableOpacity
+                  key={facility.id}
+                  style={styles.facilityItem}
+                  onPress={() => handleFacilityPress(facility)}>
+                  <View style={styles.facilityContent}>
+                    <Text style={styles.facilityName}>{facility.name}</Text>
+                    {/* <Text style={styles.facilityDescription}>
                     {truncateText(facility.description, 20)}
                   </Text> */}
-                </View>
-                <View style={styles.arrowContainer}>
-                  {/* <Image
+                  </View>
+                  <View style={styles.arrowContainer}>
+                    {/* <Image
                     source={require('../assets/icons/arrow.png')}
                     style={styles.arrowIcon}
                   /> */}
-                </View>
+                  </View>
+                </TouchableOpacity>
+              ))}
+            </View>
+          </View>
+        </ScrollView>
+
+        <Modal visible={showMap} animationType="slide" statusBarTranslucent>
+          <SafeAreaView style={styles.modalContainer}>
+            <View style={styles.modalHeader}>
+              <TouchableOpacity
+                onPress={() => setShowMap(false)}
+                style={styles.modalBackButton}>
+                <Image
+                  source={require('../assets/icons/return.png')}
+                  style={styles.backIcon}
+                />
               </TouchableOpacity>
-            ))}
-          </View>
-        </View>
-      </ScrollView>
+              <Text style={styles.modalTitle}>{beach.name}</Text>
+              <TouchableOpacity
+                onPress={handleOpenMaps}
+                style={styles.openMapsButton}>
+                <Text style={styles.openMapsText}>Open in Maps</Text>
+              </TouchableOpacity>
+            </View>
 
-      <Modal visible={showMap} animationType="slide" statusBarTranslucent>
-        <SafeAreaView style={styles.modalContainer}>
-          <View style={styles.modalHeader}>
-            <TouchableOpacity
-              onPress={() => setShowMap(false)}
-              style={styles.modalBackButton}>
-              <Image
-                source={require('../assets/icons/return.png')}
-                style={styles.backIcon}
-              />
-            </TouchableOpacity>
-            <Text style={styles.modalTitle}>{beach.name}</Text>
-            <TouchableOpacity
-              onPress={handleOpenMaps}
-              style={styles.openMapsButton}>
-              <Text style={styles.openMapsText}>Open in Maps</Text>
-            </TouchableOpacity>
-          </View>
-
-          <MapView
-            style={styles.modalMap}
-            initialRegion={{
-              latitude: beach.location.lat,
-              longitude: beach.location.lng,
-              latitudeDelta: 0.02,
-              longitudeDelta: 0.02,
-            }}>
-            <Marker
-              coordinate={{
+            <MapView
+              style={styles.modalMap}
+              initialRegion={{
                 latitude: beach.location.lat,
                 longitude: beach.location.lng,
-              }}
-              title={beach.name}
-              description={beach.addresss}
-            />
-          </MapView>
-        </SafeAreaView>
-      </Modal>
-    </SafeAreaView>
+                latitudeDelta: 0.02,
+                longitudeDelta: 0.02,
+              }}>
+              <Marker
+                coordinate={{
+                  latitude: beach.location.lat,
+                  longitude: beach.location.lng,
+                }}
+                title={beach.name}
+                description={beach.addresss}
+              />
+            </MapView>
+          </SafeAreaView>
+        </Modal>
+      </SafeAreaView>
+    </ImagedLayout>
   );
 };
 
@@ -235,7 +238,7 @@ export default BeachDetails;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'black',
+    // backgroundColor: 'black',
   },
   imageContainer: {
     position: 'relative',
